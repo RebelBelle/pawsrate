@@ -29,6 +29,18 @@ src/
 └── LoginPage.tsx          # Main login page component
 ```
 
+## Git Setup
+
+This project includes a comprehensive `.gitignore` file that excludes:
+- `node_modules/` (dependencies)
+- Build outputs (`dist/`, `build/`)
+- Environment files (`.env*`)
+- IDE files (`.vscode/`, `.idea/`)
+- OS files (`.DS_Store`)
+- Logs and cache files
+
+Only 11 essential files are tracked in git.
+
 ## Features
 
 - Clean, accessible login form
