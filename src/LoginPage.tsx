@@ -1,16 +1,13 @@
 import React from 'react';
 import { FormPanel } from './components/FormPanel';
 
-export const LoginPage: React.FC = () => {
-  const handleSignIn = async (email: string, password: string, rememberMe: boolean) => {
-    console.log('Sign in attempt:', { email, rememberMe });
-    // TODO: Implement your authentication logic here
-    // Example: call your API, handle success/error, redirect, etc.
-  };
+interface LoginPageProps {
+  onNavigateToSignup: () => void;
+}
 
-  const handleSignUp = () => {
-    console.log('Navigate to sign up');
-    // TODO: Implement navigation to sign up page
+export const LoginPage: React.FC<LoginPageProps> = ({ onNavigateToSignup }) => {
+  const handleSignIn = async (data: { email: string; password: string; rememberMe?: boolean }) => {
+    console.log('Sign in attempt:', data);
   };
 
   return (
@@ -21,9 +18,7 @@ export const LoginPage: React.FC = () => {
       minHeight: '100vh',
       backgroundColor: '#f9fafb'
     }}>
-      <FormPanel onSignIn={handleSignIn} onSignUp={handleSignUp} />
+      <FormPanel mode="login" onSubmit={handleSignIn} subtitleAction={onNavigateToSignup} />
     </div>
   );
 };
-
-export default LoginPage;

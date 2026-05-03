@@ -11,53 +11,59 @@
 
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Mail, Lock, Eye, EyeOff, Check } from 'lucide-react';
-import '../../styles/FormPanel.scss';
+import { Button } from './Button';
+import '../styles/FormPanel.scss';
 
 interface FormPanelProps {
-  onSignIn?: (email: string, password: string, rememberMe: boolean) => void;
-  onSignUp?: () => void;
+  mode?: 'login' | 'signup';
+  title?: string;
+  subtitle?: string;
+  subtitleAction?: () => void;
+  submitText?: string;
+  onSubmit?: (data: { email: string; password: string; confirmPassword?: string; rememberMe?: boolean }) => void | Promise<void>;
+  onToggleAuth?: () => void;
+  showRememberMe?: boolean;
+  showConfirmPassword?: boolean;
 }
 
 /**
- * FormPanel - Sign-in form component with custom SCSS styling
+ * FormPanel - Reusable auth form component supporting login and signup
  * All styles managed through CSS variables and SCSS classes
- * Zero inline styles - clean, maintainable JSX
  */
-export const FormPanel: React.FC<FormPanelProps> = ({ onSignIn, onSignUp }) => {
+export const FormPanel: React.FC<FormPanelProps> = ({
+  mode = 'login',
+  title = 'Welcome! Sign In.',
+  subtitle = "Don't have an account? Create one free →",
+  subtitleAction,
+  submitText = 'Sign In →',
+  onSubmit,
+  onToggleAuth,
+  showRememberMe = mode === 'login',
+  showConfirmPassword = mode === 'signup',
+}) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPasswordView, setShowConfirmPasswordView] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleRememberChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRememberMe(e.target.checked);
-  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      if (onSignIn) {
-        await onSignIn(email, password, rememberMe);
+      if (onSubmit) {
+        await onSubmit({
+          email,
+          password,
+          confirmPassword: showConfirmPassword ? confirmPassword : undefined,
+          rememberMe: showRememberMe ? rememberMe : undefined,
+        });
       }
     } finally {
       setIsSubmitting(false);
-    }
-  };
-
-  const handleSignUpClick = () => {
-    if (onSignUp) {
-      onSignUp();
     }
   };
 
@@ -65,14 +71,17 @@ export const FormPanel: React.FC<FormPanelProps> = ({ onSignIn, onSignUp }) => {
     <div className="form-panel">
       {/* Header */}
       <div className="form-panel__header">
-        <h1 className="form-panel__title">Welcome! Sign In.</h1>
-        <button
-          className="form-panel__subtitle"
-          onClick={handleSignUpClick}
-          aria-label="Create an account"
-        >
-          Don't have an account? Create one free →
-        </button>
+        <h1 className="form-panel__title">{title}</h1>
+        {subtitle && (
+          <button
+            className="form-panel__subtitle"
+            onClick={subtitleAction || onToggleAuth}
+            aria-label={subtitle}
+            type="button"
+          >
+            {subtitle}
+          </button>
+        )}
       </div>
 
       {/* Form */}
@@ -89,7 +98,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({ onSignIn, onSignUp }) => {
               type="email"
               placeholder="you@email.com"
               value={email}
-              onChange={handleEmailChange}
+              onChange={(e) => setEmail(e.target.value)}
               required
               aria-label="Email address"
               className="form-panel__input"
@@ -110,7 +119,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({ onSignIn, onSignUp }) => {
                 type={showPassword ? 'text' : 'password'}
                 placeholder="••••••••••••"
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 aria-label="Password"
                 className="form-panel__input"
@@ -133,41 +142,76 @@ export const FormPanel: React.FC<FormPanelProps> = ({ onSignIn, onSignUp }) => {
           </button>
         </div>
 
-        {/* Remember Row */}
-        <div className="form-panel__remember-row">
-          <div className="form-panel__remember-left">
+        {/* Confirm Password Field (Signup) */}
+        {showConfirmPassword && (
+          <div className="form-panel__password-wrap">
+            <div className="form-panel__field">
+              <label htmlFor="confirm-password" className="form-panel__label">
+                Confirm Password
+              </label>
+              <div className="form-panel__input-wrapper">
+                <Lock size={18} strokeWidth={2} />
+                <input
+                  id="confirm-password"
+                  type={showConfirmPasswordView ? 'text' : 'password'}
+                  placeholder="••••••••••••"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  aria-label="Confirm password"
+                  className="form-panel__input"
+                />
+              </div>
+            </div>
+
+            {/* Confirm Password Visibility Toggle */}
             <button
               type="button"
-              onClick={() => setRememberMe(!rememberMe)}
-              className="form-panel__checkbox"
-              aria-label="Remember me"
-              aria-pressed={rememberMe}
+              onClick={() => setShowConfirmPasswordView(!showConfirmPasswordView)}
+              aria-label={showConfirmPasswordView ? 'Hide password' : 'Show password'}
+              className="form-panel__toggle-button"
             >
-              {rememberMe && <Check size={12} color="white" strokeWidth={3} />}
+              {showConfirmPasswordView ? (
+                <EyeOff size={16} strokeWidth={2} />
+              ) : (
+                <Eye size={16} strokeWidth={2} />
+              )}
             </button>
-            <label className="form-panel__remember-label" htmlFor="remember">
-              Remember me
-            </label>
           </div>
-          <button
-            type="button"
-            className="form-panel__forgot-button"
-            onClick={() => console.log('Navigate to forgot password')}
-            aria-label="Forgot password"
-          >
-            Forgot password?
-          </button>
-        </div>
+        )}
+
+        {/* Remember Row (Login Only) */}
+        {showRememberMe && (
+          <div className="form-panel__remember-row">
+            <div className="form-panel__remember-left">
+              <button
+                type="button"
+                onClick={() => setRememberMe(!rememberMe)}
+                className="form-panel__checkbox"
+                aria-label="Remember me"
+                aria-pressed={rememberMe}
+              >
+                {rememberMe && <Check size={12} color="white" strokeWidth={3} />}
+              </button>
+              <label className="form-panel__remember-label" htmlFor="remember">
+                Remember me
+              </label>
+            </div>
+            <button
+              type="button"
+              className="form-panel__forgot-button"
+              onClick={() => console.log('Navigate to forgot password')}
+              aria-label="Forgot password"
+            >
+              Forgot password?
+            </button>
+          </div>
+        )}
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="form-panel__submit-button"
-          disabled={isSubmitting || !email || !password}
-          aria-label="Sign in to your account"
-        >
-          {isSubmitting ? 'Signing In...' : 'Sign In →'}
-        </button>
+        <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting} loadingText={`${submitText.split(' ')[0]}ing...`}>
+          {submitText}
+        </Button>
       </form>
 
       {/* Paw Divider */}

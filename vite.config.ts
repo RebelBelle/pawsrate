@@ -30,8 +30,6 @@ export default defineConfig({
     // SCSS/SASS preprocessing
     preprocessorOptions: {
       scss: {
-        // Global variables accessible in all SCSS files (optional)
-        additionalData: `@import "src/styles/variables.scss";`,
       },
     },
     // CSS module configuration
