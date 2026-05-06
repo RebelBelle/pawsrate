@@ -6,7 +6,6 @@
   // Colors - Primary palette
   --color-primary: #f3887d;
   --color-primary-hover: #e67b6f;
-  --color-primary-dark: #d96b5d;
   
   // Colors - Accent
   --color-accent: #bc1f7c;
@@ -22,7 +21,7 @@
   // Colors - UI elements
   --color-border: #d1d8e6;
   --color-background: #ffffff;
-  --color-surface-subtle: #f8f7f8;
+  --color-surface-subtle: #FFF0EB;
   --color-surface-light: #f9fafb;
   --color-error: #ef4444;
   --color-success: #10b981;
@@ -60,7 +59,7 @@
   --space-xs: 4px;
   --space-sm: 6px;
   --space-md: 8px;
-  --space-lg: 12px;
+  --space-lg: 14px;
   --space-xl: 24px;
   --space-2xl: 32px;
   --space-3xl: 48px;
@@ -68,9 +67,10 @@
   --space-5xl: 72px;
   
   // Border radius
-  --radius-sm: 4px;
+  --radius-sm: 6px;
   --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
   
   // Shadows
@@ -122,8 +122,10 @@ html {
 body {
   font-family: var(--font-family);
   color: var(--color-text-primary);
-  background-color: var(--color-surface-light);
+  //background-color: var(--color-surface-subtle);
+  background: radial-gradient(circle at left,rgba(255, 255, 255, 1) 0%, rgba(255, 240, 235, 1) 65%);
   line-height: var(--line-height-normal);
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

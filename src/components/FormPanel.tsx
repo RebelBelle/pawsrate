@@ -10,8 +10,9 @@
  */
 
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { Mail, Lock, Eye, EyeOff, Check } from 'lucide-react';
 import { Button } from './Button';
+import { FormField } from './FormField';
+import { Checkbox } from './Checkbox';
 import '../styles/FormPanel.scss';
 
 interface FormPanelProps {
@@ -87,120 +88,64 @@ export const FormPanel: React.FC<FormPanelProps> = ({
       {/* Form */}
       <form className="form-panel__form" onSubmit={handleSubmit} noValidate>
         {/* Email Field */}
-        <div className="form-panel__field">
-          <label htmlFor="email" className="form-panel__label">
-            Email address
-          </label>
-          <div className="form-panel__input-wrapper">
-            <Mail size={18} strokeWidth={2} />
-            <input
-              id="email"
-              type="email"
-              placeholder="you@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              aria-label="Email address"
-              className="form-panel__input"
-            />
-          </div>
-        </div>
+        <FormField
+          id="email"
+          label="Email address"
+          type="email"
+          placeholder="you@email.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          aria-label="Email address"
+        />
 
-        {/* Password Wrap */}
-        <div className="form-panel__password-wrap">
-          <div className="form-panel__field">
-            <label htmlFor="password" className="form-panel__label">
-              Password
-            </label>
-            <div className="form-panel__input-wrapper">
-              <Lock size={18} strokeWidth={2} />
-              <input
-                id="password"
-                type={showPassword ? 'text' : 'password'}
-                placeholder="••••••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                aria-label="Password"
-                className="form-panel__input"
-              />
-            </div>
-          </div>
+        {/* Password Field */}
+        <FormField
+          id="password"
+          label="Password"
+          type="password"
+          placeholder="••••••••••••"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          aria-label="Password"
+          isPasswordVisible={showPassword}
+          showPasswordToggle={true}
+          onTogglePassword={() => setShowPassword(!showPassword)}
+        />
 
-          {/* Password Visibility Toggle */}
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            aria-label={showPassword ? 'Hide password' : 'Show password'}
-            className="form-panel__toggle-button"
-          >
-            {showPassword ? (
-              <EyeOff size={16} strokeWidth={2} />
-            ) : (
-              <Eye size={16} strokeWidth={2} />
-            )}
-          </button>
-        </div>
-
-        {/* Confirm Password Field (Signup) */}
+        {/* Confirm Password Field */}
         {showConfirmPassword && (
-          <div className="form-panel__password-wrap">
-            <div className="form-panel__field">
-              <label htmlFor="confirm-password" className="form-panel__label">
-                Confirm Password
-              </label>
-              <div className="form-panel__input-wrapper">
-                <Lock size={18} strokeWidth={2} />
-                <input
-                  id="confirm-password"
-                  type={showConfirmPasswordView ? 'text' : 'password'}
-                  placeholder="••••••••••••"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  aria-label="Confirm password"
-                  className="form-panel__input"
-                />
-              </div>
-            </div>
-
-            {/* Confirm Password Visibility Toggle */}
-            <button
-              type="button"
-              onClick={() => setShowConfirmPasswordView(!showConfirmPasswordView)}
-              aria-label={showConfirmPasswordView ? 'Hide password' : 'Show password'}
-              className="form-panel__toggle-button"
-            >
-              {showConfirmPasswordView ? (
-                <EyeOff size={16} strokeWidth={2} />
-              ) : (
-                <Eye size={16} strokeWidth={2} />
-              )}
-            </button>
-          </div>
+          <FormField
+            id="confirm-password"
+            label="Confirm Password"
+            type="password"
+            placeholder="••••••••••••"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            aria-label="Confirm Password"
+            isPasswordVisible={showConfirmPasswordView}
+            showPasswordToggle={true}
+            onTogglePassword={() => setShowConfirmPasswordView(!showConfirmPasswordView)}
+          />
         )}
 
         {/* Remember Row (Login Only) */}
         {showRememberMe && (
           <div className="form-panel__remember-row">
             <div className="form-panel__remember-left">
-              <button
-                type="button"
-                onClick={() => setRememberMe(!rememberMe)}
-                className="form-panel__checkbox"
-                aria-label="Remember me"
-                aria-pressed={rememberMe}
-              >
-                {rememberMe && <Check size={12} color="white" strokeWidth={3} />}
-              </button>
-              <label className="form-panel__remember-label" htmlFor="remember">
-                Remember me
-              </label>
+              <Checkbox
+                id="remember-me"
+                label="Remember me"
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
+              />
             </div>
             <button
               type="button"
               className="form-panel__forgot-button"
-              onClick={() => console.log('Navigate to forgot password')}
+              onClick={() => {}}
               aria-label="Forgot password"
             >
               Forgot password?

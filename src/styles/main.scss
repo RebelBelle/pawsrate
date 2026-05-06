@@ -2,4 +2,255 @@
 // MAIN
 // ============================================================================
 
-@import './FormPanel.scss';
+@import 'open-props/style';
+@import './variables';
+@import './FormPanel';
+
+#root {
+    height: 100vh;
+}
+
+// Form Fields
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+
+  .form-label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-tight);
+    text-transform: capitalize;
+    margin: 0;
+    padding: 0;
+  }
+
+  .form-input {
+    flex: 1;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-tight);
+    font-family: var(--font-family);
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+
+    &::placeholder {
+        color: var(--color-text-secondary);
+    }
+
+    &:disabled {
+        color: var(--color-text-tertiary);
+        cursor: not-allowed;
+    }
+}
+}
+
+.form-input-wrapper {
+  align-items: center;
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+  &:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-focus);
+  }
+
+  .icon {
+    color: var(--color-icon-primary);
+    flex-shrink: 0;
+  }
+}
+
+// Checkbox
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+
+  &--left {
+    flex-direction: row-reverse;
+  }
+}
+
+.checkbox__input {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-text-tertiary);
+  background-color: var(--color-background);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  flex-shrink: 0;
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.5 8.5l2.5 2.5 6.5-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.checkbox__label {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+
+// Buttons
+
+.btn {
+  // width: 100%;
+  padding: var(--space-lg);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), opacity var(--transition-fast),
+    transform var(--transition-fast);
+  font-family: inherit;
+
+  &.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+
+    &:hover:not(:disabled) {
+        background-color: var(--color-primary-hover);
+    }
+  }
+
+  &.btn-icon {
+    color: var(--color-text-secondary);
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    &:hover {
+        .icon {
+            color: var(--color-text-primary);
+        }
+    }
+
+    &:focus {
+        .icon {
+            color: var(--color-accent);
+        }
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:not(.btn-icon):focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Icons
+
+.icon {
+    height: 1.25rem;
+    stroke-width: 2;
+    width: 1.25rem;
+}
+
+// Hero
+
+.hero {
+  align-items: center;
+  background-image: url('../images/chihuahua-with-bowtie-crop.png');
+  background-position: -15% 10%;
+  background-repeat: no-repeat;
+  display: grid;
+  height: 100%;
+
+  .hero-content,
+  .hero-img {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    padding: var(--space-4xl) var(--space-5xl);
+   }
+
+  .hero-img {
+    .hero-text {
+        color: white;
+    }
+  }
+}
+
+@media (width >= 768px) {
+  .hero {
+    grid-template-columns: 1.25fr 1fr;
+  }
+}
+
+// Dashboard
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .dashboard-metrics {
+        display: grid;
+        gap: var(--space-4xl);
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    } 
+    
+    .dashboard-body {
+        background-color: #fff;
+        border-radius: var(--radius-lg);
+        flex: 1;
+        padding: var(--space-4xl);
+        margin: var(--space-4xl);
+    }
+}

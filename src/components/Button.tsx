@@ -7,14 +7,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button: React.FC<ButtonProps> = ({
   children,
-  className = '',
+  className = 'btn',
   disabled,
   isLoading = false,
   loadingText,
   type = 'button',
   ...props
 }) => {
-  const buttonClassName = ['form-panel__submit-button', className].filter(Boolean).join(' ');
+  const buttonClassName = ['btn-primary', className].filter(Boolean).join(' ');
   const content = isLoading ? (loadingText ?? children) : children;
 
   return (
