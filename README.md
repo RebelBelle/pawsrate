@@ -1,56 +1,38 @@
-# PawsRate Login Page
+# PawsRate
 
-A clean, minimal React login page using SCSS styling.
+React + Vite application using TypeScript and SCSS.
 
-## Quick Start
+---
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+## Setup
 
-2. **Start development server:**
-   ```bash
-   npm run dev
-   ```
+- `npm install`
+- `npm run dev`
 
-3. **Open in browser:**
-   Visit http://localhost:5173/
+App runs at:  
+http://localhost:5173
 
-## Project Structure
-
-```
-src/
-├── components/
-│   └── FormPanel.tsx      # Login form component
-├── styles/
-│   ├── main.scss          # Main styles entry point
-│   └── FormPanel.scss     # FormPanel component styles
-└── LoginPage.tsx          # Main login page component
-```
-
-## Git Setup
-
-This project includes a comprehensive `.gitignore` file that excludes:
-- `node_modules/` (dependencies)
-- Build outputs (`dist/`, `build/`)
-- Environment files (`.env*`)
-- IDE files (`.vscode/`, `.idea/`)
-- OS files (`.DS_Store`)
-- Logs and cache files
-
-Only 11 essential files are tracked in git.
-
-## Features
-
-- Clean, accessible login form
-- SCSS styling with design tokens
-- Responsive design
-- TypeScript support
-- Hot module replacement for development
+---
 
 ## Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
+- `npm run dev` – start dev server
+- `npm run build` – production build
+- `npm run preview` – preview production build
+
+---
+
+## Project Structure
+
+- `src/App.tsx` – main app shell and routing
+- `src/main.tsx` – app entry point
+- `src/LoginPage.tsx` – login screen
+- `src/CreateAccountPage.tsx` – account creation screen
+- `src/DashboardPage.tsx` – dashboard screen
+- `src/styles/` – global style entrypoints and variables
+
+---
+
+## Notes
+
+- Project is actively evolving, so structure and conventions may change

@@ -29,7 +29,6 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     <div className="dashboard">
       <header className="dashboard-header">
         <div>
-          <p className="dashboard__eyebrow">Dashboard</p>
           <h1 className="dashboard__title">{petName}'s Dash</h1>
         </div>
         {onLogout && (
