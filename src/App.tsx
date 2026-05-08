@@ -1,30 +1,22 @@
-import { useState } from 'react';
-import { LoginPage } from './LoginPage';
-import { CreateAccountPage } from './CreateAccountPage';
-import { DashboardPage } from './DashboardPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { LoginPage } from './pages/Login';
+import { CreateAccountPage } from './pages/CreateAccount';
+import { DashboardPage } from './pages/Dashboard';
+import { Settings } from './pages/Settings';
+import { NotFound } from './pages/NotFound';
 
 export default function App() {
-  const [page, setPage] = useState<'login' | 'signup' | 'dashboard'>('login');
-  const [petName, setPetName] = useState<string>('Peso');
-
-  if (page === 'login') {
-    return (
-      <LoginPage
-        onNavigateToSignup={() => setPage('signup')}
-        onNavigateToDashboard={() => setPage('dashboard')}
-      />
-    );
-  }
-
-  if (page === 'signup') {
-    return <CreateAccountPage onNavigateToLogin={() => setPage('login')} />;
-  }
-
   return (
-    <DashboardPage
-      petName={petName}
-      onPetNameChange={setPetName}
-      onLogout={() => setPage('login')}
-    />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<CreateAccountPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

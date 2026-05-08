@@ -1,14 +1,17 @@
 import React from 'react';
-import { FormPanel } from './components/FormPanel';
-import { HeroPanel } from './components/HeroPanel';
+import { useNavigate } from 'react-router-dom';
+import { FormPanel } from '../components/FormPanel';
+import { HeroPanel } from '../components/HeroPanel';
 
-interface CreateAccountPageProps {
-  onNavigateToLogin: () => void;
-}
+export const CreateAccountPage: React.FC = () => {
+  const navigate = useNavigate();
 
-export const CreateAccountPage: React.FC<CreateAccountPageProps> = ({ onNavigateToLogin }) => {
   const handleSignUp = async (data: { email: string; password: string; confirmPassword?: string }) => {
     // TODO: Implement account creation logic here
+  };
+
+  const handleNavigateToLogin = () => {
+    navigate('/login');
   };
 
   return (
@@ -24,9 +27,9 @@ export const CreateAccountPage: React.FC<CreateAccountPageProps> = ({ onNavigate
           subtitle="Already have an account? Sign in →"
           submitText="Create Account →"
           onSubmit={handleSignUp}
-          subtitleAction={onNavigateToLogin}
+          subtitleAction={handleNavigateToLogin}
         />
       </div>
     </div>
   );
-}
+};

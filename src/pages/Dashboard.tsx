@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
-import { Card } from './components/Card';
-import { DrawerRateFood } from './components/DrawerRateFood';
-import { Button } from './components/Button';
+import { useNavigate } from 'react-router-dom';
+import { Card } from '../components/Card';
+import { DrawerRateFood } from '../components/DrawerRateFood';
+import { Button } from '../components/Button';
 
-interface DashboardPageProps {
-  petName: string;
-  onPetNameChange: (name: string) => void;
-  onLogout?: () => void;
-}
-
-export const DashboardPage: React.FC<DashboardPageProps> = ({
-  petName,
-  onPetNameChange,
-  onLogout,
-}) => {
+export const DashboardPage: React.FC = () => {
+  const navigate = useNavigate();
+  const [petName, setPetName] = useState<string>('Peso');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isPetNameEditOpen, setIsPetNameEditOpen] = useState(false);
   const [tempPetName, setTempPetName] = useState(petName);
 
+  const handleLogout = () => {
+    navigate('/login');
+  };
+
   const handleSavePetName = () => {
     if (tempPetName.trim()) {
-      onPetNameChange(tempPetName.trim());
+      setPetName(tempPetName.trim());
       setIsPetNameEditOpen(false);
     }
   };
@@ -31,11 +28,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         <div>
           <h1 className="dashboard__title">{petName}'s Dash</h1>
         </div>
-        {onLogout && (
-          <button type="button" className="dashboard__logout" onClick={onLogout}>
-            Log out
-          </button>
-        )}
+        <button type="button" className="dashboard__logout" onClick={handleLogout}>
+          Log out
+        </button>
       </header>
 
       <section className="dashboard-metrics">
