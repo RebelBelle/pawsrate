@@ -1,63 +1,78 @@
 # AGENTS.md
 
-## Stack
-- React + Vite
-- TypeScript
-- Lucide Icons
-
----
-
 ## Core Principles
-- Prefer small, focused components and small diffs
-- Follow existing project patterns before introducing new ones
-- Reuse existing utilities/components before creating new ones
+
+- Prefer consistency over cleverness
+- Prefer small diffs over big, unnecessary changes
+- Reuse existing components whenever possible
 - Keep logic simple and readable
-- Avoid premature abstraction
-- Do not refactor unrelated code
-- Prefer editing existing files over creating new abstractions
+- Keep files small and focused
+- Avoid over-engineering
+- Match existing code style before introducing new patterns, unless the existing code style is poor
 
 ---
 
-## Project Structure
-- All SCSS is centralized and organized in `src/styles`
-- Do not colocate `.scss` files with components
-- Component folders should contain only TypeScript/React files
+## Tech Stack
+
+- React
+- Vite
+- TypeScript
+- SCSS modules
+- Lucide icons
+- Tokens Studio (not hooked up yet, but will be soon)
+- GitHub
 
 ---
 
-## Styling Rules
-- Prefer existing CSS variables, Open Props variables, shared tokens, SCSS mixins, and utilities when available
-- Prefer simple, maintainable CSS over overly clever abstractions
-- Keep spacing, radii, typography, and overall styling consistent with existing patterns
-- Prefer short, readable class names (e.g. `.btn-primary`, `.card-title`)
-- Avoid deeply nested or overly verbose naming unless already established in the codebase
-- Avoid duplicating existing style patterns
-- Avoid hardcoded colors when suitable variables exist
-- Use existing SCSS structure and conventions
-- Create mixins/utilities only for clearly repeated patterns
-- Avoid one-off variables, tokens, or abstractions
+## Commands
+
+```bash
+npm run dev          # Start Vite dev server
+npm run build        # TypeScript + production build
+npm run preview      # Preview production build locally
+npm run lint         # Run ESLint with zero warnings allowed
+npm run type-check   # Run TypeScript type checking
+npm run format       # Format TS/TSX/SCSS/CSS with Prettier
+```
 
 ---
 
 ## Components
-- Components live in `src/components`
-- Keep components small and composable
-- Prefer composition over prop-heavy APIs
-- Co-locate component-specific helpers/types when appropriate
-- Avoid large or mixed-responsibility files
-- Prefer extending existing components over creating near-duplicates
+
+Components live in `src/components`
+
+### Prefer
+- One component per folder
+- Extending existing components over creating near-duplicates
+- Composition over inheritance
+- Controlled inputs
+- Reusable shared primitives
+
+### Avoid
+- Large or mixed-responsibility files
+- Prop-heavy APIs
+- Colocating `.scss` files with components
+- Duplicate variants
+- One-off utility classes
 
 ---
 
-## Dependencies
-Do not add new heavy dependencies without approval.
+## Styling Rules
 
-Ask before adding:
-- UI frameworks
-- state management libraries
-- date libraries
-- charting libraries
-- large utility libraries
+Styles live in `src/styles`
+
+### Prefer
+- Existing CSS variables, Open Props variables, shared tokens, SCSS mixins, and utilities when available
+- Simple, maintainable CSS over overly clever abstractions
+- Consistent spacing, radii, typography, and overall styling
+- Short, readable class names (e.g. `.btn-primary`, `.card-title`)
+- Creation of mixins/utilities only for clearly repeated patterns
+
+### Avoid
+- Deeply-nested or overly verbose naming unless already established in the codebase
+- Duplicating existing style patterns
+- Hardcoded colors when suitable variables exist
+- One-off variables, tokens, or abstractions
 
 ---
 
@@ -80,6 +95,7 @@ Ask first:
 ---
 
 ## Existing Architecture
+
 - See `App.tsx` for routing structure
 - Follow existing folder and naming conventions
 - Do not reorganize files unless requested
@@ -87,6 +103,7 @@ Ask first:
 ---
 
 ## Documentation
+
 - Keep `README.md` updated when meaningful structural or setup changes are made
 - Do not update README for minor or unrelated code changes
 - Keep documentation minimal and manually intentional
@@ -94,13 +111,29 @@ Ask first:
 ---
 
 ## Accessibility
+
 - Use semantic HTML and accessible labels
 - Ensure keyboard accessibility where relevant
 - Avoid color-only communication
 
 ---
 
+## AI Workflow Rules
+
+Before coding:
+- Check for existing similar components
+- Reuse patterns already present, unless pattern is bad: then suggest an improved pattern
+
+Before finishing:
+- Check TypeScript types
+- Check responsiveness
+- Check accessibility
+- Remove dead code/comments
+
+---
+
 ## When Stuck
+
 - Ask a concise clarifying question
 - Propose a short implementation plan
 - Explain tradeoffs briefly
