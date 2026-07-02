@@ -66,6 +66,7 @@ Styles live in `src/styles`
 - Simple, maintainable CSS over overly clever abstractions
 - Consistent spacing, radii, typography, and overall styling
 - Short, readable class names (e.g. `.btn-primary`, `.card-title`)
+- Alphabetical property ordering
 - Creation of mixins/utilities only for clearly repeated patterns
 
 ### Avoid
