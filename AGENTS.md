@@ -131,8 +131,22 @@ Ask first:
 ## Accessibility
 
 - Use semantic HTML and accessible labels
+- Use links for navigation and buttons for actions
+- Every HTML `<button>` must declare `type`: `button` for ordinary controls, `submit` for intentional form submission, and `reset` only when native reset behavior is required. Never rely on the browser default, even outside a form
 - Ensure keyboard accessibility where relevant
 - Avoid color-only communication
+
+---
+
+## UI Copy
+
+- Say only what helps users understand the content or take the next action. Avoid helper text that repeats a label or describes an obvious control
+- Use title case for short English UI labels and accessible control names, including buttons, links, fields, menus, tabs, options, and short section titles. Capitalize the first and last words and major words; keep interior articles, conjunctions, and short prepositions lowercase, as in `Rate a Food` and `Save Changes`
+- Use sentence case for descriptions, headlines, instructions, placeholders, loading messages, image descriptions, and errors. Heading markup alone does not make text a short UI label
+- Preserve official names, acronyms, units, user-entered text, external content, and locale conventions. Author casing in source text; do not use blanket runtime conversion or `text-transform: capitalize`
+- Prefer specific Verb Object action labels, such as `Save Changes` or `Create Account`. Navigation destinations and compact selectors can use their natural names
+- Write concise UI errors without a trailing period, such as `Enter a valid email address`. Preserve necessary internal punctuation; do not automatically strip punctuation from external messages
+- Check visible and accessible copy during UI review; automated checks do not verify these editorial rules
 
 ---
 

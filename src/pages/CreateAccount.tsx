@@ -1,17 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FormPanel } from '../components/FormPanel';
 import { HeroPanel } from '../components/HeroPanel';
 
 export const CreateAccountPage: React.FC = () => {
-  const navigate = useNavigate();
-
   const handleSignUp = async () => {
     // TODO: Implement account creation logic here
-  };
-
-  const handleNavigateToLogin = () => {
-    navigate('/login');
   };
 
   return (
@@ -20,11 +13,12 @@ export const CreateAccountPage: React.FC = () => {
       <div className="hero-content">
         <FormPanel
           mode="signup"
-          title="Create Account"
-          subtitle="Already have an account? Sign in →"
-          submitText="Create Account →"
+          title="Welcome!"
+          subtitle="Create an account and start tracking your pup's food"
+          submitText="Create Account"
           onSubmit={handleSignUp}
-          subtitleAction={handleNavigateToLogin}
+          helpText="Already have an account?"
+          helpLinkText="Sign in now"
         />
       </div>
     </div>

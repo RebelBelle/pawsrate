@@ -2,11 +2,7 @@
 @use 'animations';
 @use 'tokens' as *;
 
-// @import 'open-props/style'; //TODO: Check what this is?
-
-// ============================================================================
-// RESET & BASE STYLES
-// ============================================================================
+// Reset Styles
 
 *,
 *::before,
@@ -20,8 +16,9 @@ html {
   font-size: 16px;
 }
 
+// Base Styles
+
 body {
-  // background-color: var(--color-surface-subtle);
   background: radial-gradient(
     circle at left,
     rgb(255 255 255 / 100%) 0%,
@@ -49,9 +46,8 @@ body {
 // Form Fields
 
 .form-field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
+  @include theme-flex($direction: column, $gap: var(--space-sm));
+
   width: 100%;
 
   .form-label {
@@ -86,12 +82,11 @@ body {
 }
 
 .form-input-wrapper {
-  align-items: center;
+  @include theme-flex($gap: var(--space-lg));
+
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  display: flex;
-  gap: var(--space-lg);
   padding: var(--space-lg);
   transition:
     border-color var(--transition-fast),
@@ -111,9 +106,7 @@ body {
 // Checkbox
 
 .checkbox {
-  align-items: center;
-  display: flex;
-  gap: var(--space-md);
+  @include theme-flex($gap: var(--space-md));
 
   &--left {
     flex-direction: row-reverse;
@@ -178,8 +171,6 @@ body {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
-
-  // width: 100%;
   padding: var(--space-lg);
   transition:
     background-color var(--transition-fast),
@@ -196,11 +187,10 @@ body {
   }
 
   &.btn-icon {
-    align-items: center;
+    @include theme-flex;
+
     background: none;
     color: var(--color-text-secondary);
-    display: flex;
-    justify-content: center;
     padding: 0;
 
     &:hover {
@@ -231,74 +221,28 @@ body {
   }
 }
 
-// Hero
+// Links
 
-.hero {
-  align-items: center;
-  background-image: url('../images/chihuahua-with-bowtie-crop.png');
-  background-position: -15% 10%;
-  background-repeat: no-repeat;
-  display: grid;
-  height: 100%;
+.link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 
-  .hero-content,
-  .hero-img {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    padding: var(--space-4xl) var(--space-5xl);
+  &:hover {
+    color: var(--color-accent-hover);
   }
 
-  .hero-img {
-    .hero-text {
-      color: white;
-    }
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 }
 
-@media (width >= 768px) {
-  .hero {
-    grid-template-columns: 1.25fr 1fr;
-  }
-}
+// Form Panel
 
-// Dashboard
-
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .dashboard-metrics {
-    display: grid;
-    gap: var(--space-4xl);
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-
-  .dashboard-body {
-    background-color: #fff;
-    border-radius: var(--radius-lg);
-    flex: 1;
-    margin: var(--space-4xl);
-    padding: var(--space-4xl);
-  }
-}
-
-// ============================================================================
-// FORM PANEL COMPONENT STYLES
-// ============================================================================
-
-// Form Panel Header
 .form-panel__header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+  @include theme-flex($direction: column, $gap: var(--space-md));
+
   margin-bottom: var(--space-2xl);
 }
 
@@ -312,54 +256,36 @@ body {
 }
 
 .form-panel__subtitle {
-  background: none;
-  border: none;
-  cursor: pointer;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-tight);
-  padding: 0;
-  text-align: left;
-  text-decoration: none;
-  transition: opacity var(--transition-fast);
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:focus {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-  }
+  margin: 0;
 }
 
-// Form Container
+.form-panel__help-text {
+  margin-bottom: var(--space-xl);
+}
+
 .form-panel__form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xl);
+  @include theme-flex($direction: column, $gap: var(--space-xl));
+
   margin-bottom: var(--space-2xl);
   width: 100%;
 }
 
-// Remember Row (checkbox + label + forgot link)
 .form-panel__remember-row {
-  align-items: center;
-  display: flex;
-  gap: var(--space-lg);
-  justify-content: space-between;
+  @include theme-flex($justify: space-between, $gap: var(--space-lg));
+
   padding: var(--space-sm) 0 var(--space-md) 0;
   width: 100%;
 }
 
 .form-panel__remember-left {
-  align-items: center;
+  @include theme-flex($gap: var(--space-md));
+
   cursor: pointer;
-  display: flex;
-  gap: var(--space-md);
 }
 
-// Remember Label
 .form-panel__remember-label {
   color: var(--color-text-disabled);
   cursor: pointer;
@@ -371,7 +297,6 @@ body {
   user-select: none;
 }
 
-// Forgot Password Button
 .form-panel__forgot-button {
   background: none;
   border: none;
@@ -395,12 +320,9 @@ body {
   }
 }
 
-// Paw Divider (trust section)
 .form-panel__paw-divider {
-  align-items: center;
-  display: flex;
-  gap: var(--space-lg);
-  justify-content: center;
+  @include theme-flex($gap: var(--space-lg));
+
   width: 100%;
 }
 
@@ -424,9 +346,64 @@ body {
   white-space: nowrap;
 }
 
-// ============================================================================
-// RESPONSIVE DESIGN
-// ============================================================================
+// Hero
+
+.hero {
+  align-items: center;
+  background-image: url('../images/chihuahua-with-bowtie-crop.png');
+  background-position: -15% 10%;
+  background-repeat: no-repeat;
+  display: grid;
+  height: 100%;
+
+  .hero-content,
+  .hero-img {
+    @include theme-flex($direction: column);
+
+    height: 100%;
+    padding: var(--space-4xl) var(--space-5xl);
+  }
+
+  .hero-img {
+    .hero-text {
+      color: white;
+    }
+  }
+}
+
+// Dashboard
+
+.dashboard {
+  @include theme-flex($direction: column);
+
+  height: 100%;
+
+  .dashboard-header {
+    @include theme-flex($justify: space-between);
+  }
+
+  .dashboard-metrics {
+    display: grid;
+    gap: var(--space-4xl);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .dashboard-body {
+    background-color: #fff;
+    border-radius: var(--radius-lg);
+    flex: 1;
+    margin: var(--space-4xl);
+    padding: var(--space-4xl);
+  }
+}
+
+// Responsive Layouts
+
+@media (width >= 768px) {
+  .hero {
+    grid-template-columns: 1.25fr 1fr;
+  }
+}
 
 @media (width <= 768px) {
   .form-panel {
@@ -469,11 +446,7 @@ body {
   }
 }
 
-// ============================================================================
-// ACCESSIBILITY
-// ============================================================================
-
-// Utility Classes (optional - use as needed)
+// Utilities
 
 .sr-only {
   border-width: 0;

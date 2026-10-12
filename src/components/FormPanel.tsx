@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from './Button';
 import { FormField } from './FormField';
 import { Checkbox } from './Checkbox';
@@ -7,15 +8,15 @@ interface FormPanelProps {
   mode?: 'login' | 'signup';
   title?: string;
   subtitle?: string;
-  subtitleAction?: () => void;
   submitText?: string;
+  helpText?: string;
+  helpLinkText?: string;
   onSubmit?: (data: {
     email: string;
     password: string;
     confirmPassword?: string;
     rememberMe?: boolean;
   }) => void | Promise<void>;
-  onToggleAuth?: () => void;
   showRememberMe?: boolean;
   showConfirmPassword?: boolean;
 }
@@ -26,12 +27,14 @@ interface FormPanelProps {
  */
 export const FormPanel: React.FC<FormPanelProps> = ({
   mode = 'login',
-  title = 'Welcome! Sign In.',
-  subtitle = "Don't have an account? Create one free →",
-  subtitleAction,
-  submitText = 'Sign In →',
+  title = 'Welcome!',
+  subtitle = "Sign in to your pup's food diary",
+  submitText = 'Sign In',
   onSubmit,
-  onToggleAuth,
+  helpText = mode === 'login'
+    ? "Don't have an account?"
+    : 'Already have an account?',
+  helpLinkText = mode === 'login' ? 'Create one free' : 'Sign in now',
   showRememberMe = mode === 'login',
   showConfirmPassword = mode === 'signup',
 }) => {
@@ -67,15 +70,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
       {/* Header */}
       <div className="form-panel__header">
         <h1 className="form-panel__title">{title}</h1>
-        {subtitle && (
-          <button
-            className="form-panel__subtitle"
-            onClick={subtitleAction || onToggleAuth}
-            aria-label={subtitle}
-            type="button">
-            {subtitle}
-          </button>
-        )}
+        {subtitle && <p className="form-panel__subtitle">{subtitle}</p>}
       </div>
 
       {/* Form */}
@@ -156,6 +151,13 @@ export const FormPanel: React.FC<FormPanelProps> = ({
           {submitText}
         </Button>
       </form>
+
+      <p className="form-panel__help-text">
+        {helpText}{' '}
+        <Link className="link" to={mode === 'login' ? '/signup' : '/login'}>
+          {helpLinkText}
+        </Link>
+      </p>
 
       {/* Paw Divider */}
       <div className="form-panel__paw-divider">

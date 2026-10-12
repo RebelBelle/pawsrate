@@ -11,10 +11,6 @@ export const LoginPage: React.FC = () => {
     navigate('/dashboard');
   };
 
-  const handleNavigateToSignup = () => {
-    navigate('/signup');
-  };
-
   return (
     <div className="hero">
       <HeroPanel
@@ -22,11 +18,7 @@ export const LoginPage: React.FC = () => {
         text="Brandy finally found a food she doesn't just tolerate — she loves it! PawsRate made it so easy to track what works."
       />
       <div className="hero-content">
-        <FormPanel
-          mode="login"
-          onSubmit={handleSignIn}
-          subtitleAction={handleNavigateToSignup}
-        />
+        <FormPanel mode="login" onSubmit={handleSignIn} />
       </div>
     </div>
   );
