@@ -1,14 +1,32 @@
 :root {
   // Colors - Primary palette
-  --color-primary: #f3887d;
-  --color-primary-hover: #e67b6f;
+  --color-primary: #ee5f3f;
+  --color-primary-hover: #e67b6f; // TODO
 
   // Colors - Accent
-  --color-accent: #bc1f7c;
-  --color-accent-hover: #a31a6a;
+  --color-accent: #ec4899;
+  --color-accent-hover: #a31a6a; // TODO
 
-  // Colors - Semantic text
-  --color-text-primary: #141819;
+  // Gradients
+  --gradient-brand: linear-gradient(
+    to right,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  --gradient-brand-hover: linear-gradient(
+    to right,
+    color-mix(in oklab, var(--color-primary) 94%, black),
+    color-mix(in oklab, var(--color-accent) 94%, black)
+  );
+  --gradient-background: linear-gradient(
+    to bottom right,
+    #fff7ed,
+    #fdf2f8,
+    #faf5ff
+  );
+
+  // Colors - Semantic Text
+  --color-text-primary: #334155;
   --color-text-secondary: #727b8e;
   --color-text-tertiary: #999;
   --color-text-disabled: #444;
@@ -36,6 +54,7 @@
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  --font-weight-extrabold: 900;
 
   // Font sizes
   --font-size-xs: 10px;
@@ -45,6 +64,7 @@
   --font-size-xl: 20px;
   --font-size-2xl: 28px;
   --font-size-3xl: 36px;
+  --font-size-4xl: 48px;
 
   // Line heights
   --line-height-tight: 1.2;
@@ -63,6 +83,7 @@
   --space-5xl: 72px;
 
   // Border radius
+  --radius-xs: 2px;
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 14px;
@@ -73,6 +94,10 @@
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 5%);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 10%);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 10%);
+  --shadow-button:
+    0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -4px rgb(0 0 0 / 10%);
+  --shadow-button-hover:
+    0 20px 25px -5px rgb(0 0 0 / 10%), 0 8px 10px -6px rgb(0 0 0 / 10%);
   --shadow-focus: 0 0 0 3px rgb(243 136 125 / 10%);
 
   // Transitions

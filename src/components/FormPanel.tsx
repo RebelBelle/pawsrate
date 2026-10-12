@@ -69,8 +69,8 @@ export const FormPanel: React.FC<FormPanelProps> = ({
     <div className="form-panel">
       {/* Header */}
       <div className="form-panel__header">
-        <h1 className="form-panel__title">{title}</h1>
-        {subtitle && <p className="form-panel__subtitle">{subtitle}</p>}
+        <h1 className="form-panel__title text-gradient">{title}</h1>
+        {subtitle && <h2 className="form-panel__subtitle">{subtitle}</h2>}
       </div>
 
       {/* Form */}
@@ -134,7 +134,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
             </div>
             <button
               type="button"
-              className="form-panel__forgot-button"
+              className="link-primary"
               onClick={() => {}}
               aria-label="Forgot password">
               Forgot password?
@@ -154,7 +154,9 @@ export const FormPanel: React.FC<FormPanelProps> = ({
 
       <p className="form-panel__help-text">
         {helpText}{' '}
-        <Link className="link" to={mode === 'login' ? '/signup' : '/login'}>
+        <Link
+          className="link-primary"
+          to={mode === 'login' ? '/signup' : '/login'}>
           {helpLinkText}
         </Link>
       </p>

@@ -8,21 +8,28 @@
   cursor: pointer;
   flex: 1;
   font-family: inherit;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
-  padding: var(--space-lg) var(--space-xl);
+  padding: var(--space-lg);
   transition:
     background-color var(--transition-fast),
+    box-shadow var(--transition-fast),
     opacity var(--transition-fast),
     transform var(--transition-fast);
 
+  &.btn-primary,
+  &.btn-secondary {
+    box-shadow: var(--shadow-button);
+  }
+
   &.btn-primary {
     background-color: var(--color-primary);
+    background-image: var(--gradient-brand);
     color: var(--color-text-inverse);
 
     &:hover:not(:disabled) {
-      background-color: var(--color-primary-hover);
+      background-image: var(--gradient-brand-hover);
     }
   }
 
@@ -34,6 +41,11 @@
     &:hover:not(:disabled) {
       background-color: var(--color-surface-light);
     }
+  }
+
+  &.btn-primary:hover:not(:disabled),
+  &.btn-secondary:hover:not(:disabled) {
+    box-shadow: var(--shadow-button-hover);
   }
 
   &.btn-icon {

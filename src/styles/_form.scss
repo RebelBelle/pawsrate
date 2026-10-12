@@ -24,8 +24,6 @@
     background: transparent;
     border: none;
     color: var(--color-text-primary);
-    flex: 1;
-    font-family: var(--font-family);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-regular);
     line-height: var(--line-height-tight);
@@ -111,16 +109,12 @@
 
 .form-panel__title {
   color: var(--color-primary);
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   margin: 0;
   padding: 0;
 }
 
 .form-panel__subtitle {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-tight);
   margin: 0;
 }
@@ -164,29 +158,6 @@
   user-select: none;
 }
 
-.form-panel__forgot-button {
-  background: none;
-  border: none;
-  color: var(--color-accent);
-  cursor: pointer;
-  font-family: inherit;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-tight);
-  padding: 0;
-  text-decoration: none;
-  transition: opacity var(--transition-fast);
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:focus {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
-  }
-}
-
 .form-panel__paw-divider {
   @include theme-flex($gap: var(--space-lg));
 
@@ -225,10 +196,6 @@
 
   .form-panel__title {
     font-size: var(--font-size-2xl);
-  }
-
-  .form-panel__subtitle {
-    font-size: 13px;
   }
 
   .form-panel__paw-divider {

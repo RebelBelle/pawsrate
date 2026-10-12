@@ -27,20 +27,31 @@ html {
 // Base Styles
 
 body {
-  background: radial-gradient(
-    circle at left,
-    rgb(255 255 255 / 100%) 0%,
-    rgb(255 240 235 / 100%) 65%
-  );
+  background: var(--gradient-background);
   color: var(--color-text-primary);
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-normal);
+  min-height: 100vh;
 }
 
 #root {
   height: 100vh;
+}
+
+// Typography
+
+h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.text-gradient {
+  background-clip: text;
+  background-image: var(--gradient-brand);
+  color: transparent;
 }
 
 // Icons
@@ -53,10 +64,13 @@ body {
 
 // Links
 
-.link {
-  color: var(--color-accent);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+.link-primary {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
 
   &:hover {
     color: var(--color-accent-hover);

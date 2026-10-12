@@ -14,7 +14,7 @@ export const CreateAccountPage: React.FC = () => {
         <FormPanel
           mode="signup"
           title="Welcome!"
-          subtitle="Create an account and start tracking your pup's food"
+          subtitle="Join & track your pup's food"
           submitText="Create Account"
           onSubmit={handleSignUp}
           helpText="Already have an account?"
