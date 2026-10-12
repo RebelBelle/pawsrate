@@ -68,7 +68,7 @@ Components live in `src/components`
 
 ## Styling Rules
 
-Shared styles live in `src/styles`. `Card.scss` and `DrawerRateFood.scss` currently remain beside their components; do not relocate them as part of unrelated work.
+Shared styles live in `src/styles` and load through `styles.scss`. Keep related styles in focused partials.
 
 ### Prefer
 
@@ -125,6 +125,7 @@ Ask first:
 - Keep `README.md` updated when meaningful structural or setup changes are made
 - Do not update README for minor or unrelated code changes
 - Keep documentation minimal and manually intentional
+- Document conventions rather than inventories of components or style partials; do not update documentation for each new file
 
 ---
 

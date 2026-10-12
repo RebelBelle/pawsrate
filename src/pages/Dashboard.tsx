@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../components/Card';
 import { DrawerRateFood } from '../components/DrawerRateFood';
@@ -10,6 +10,13 @@ export const DashboardPage: React.FC = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isPetNameEditOpen, setIsPetNameEditOpen] = useState(false);
   const [tempPetName, setTempPetName] = useState(petName);
+  const petNameDialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    if (isPetNameEditOpen) {
+      petNameDialogRef.current?.showModal();
+    }
+  }, [isPetNameEditOpen]);
 
   const handleLogout = () => {
     navigate('/login');
@@ -49,31 +56,18 @@ export const DashboardPage: React.FC = () => {
 
         <aside className="dashboard__sidebar">
           <section className="dashboard__panel dashboard__panel--details">
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
+            <div>
               <h2>Pet Info</h2>
               <button
-                onClick={() => setIsPetNameEditOpen(true)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontSize: 'var(--font-size-sm)',
-                  color: 'var(--color-primary)',
-                  textDecoration: 'underline',
+                type="button"
+                onClick={() => {
+                  setTempPetName(petName);
+                  setIsPetNameEditOpen(true);
                 }}>
                 Edit
               </button>
             </div>
-            <p
-              style={{
-                margin: '0.5rem 0 0 0',
-                fontSize: 'var(--font-size-base)',
-              }}>
+            <p>
               Name: <strong>{petName}</strong>
             </p>
           </section>
@@ -94,83 +88,39 @@ export const DashboardPage: React.FC = () => {
         petName={petName}
       />
 
-      {/* Pet Name Edit Modal */}
       {isPetNameEditOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 2000,
-          }}
-          onClick={() => setIsPetNameEditOpen(false)}>
-          <div
-            style={{
-              backgroundColor: 'var(--color-background)',
-              borderRadius: 'var(--radius-lg)',
-              padding: 'var(--space-xl)',
-              maxWidth: '400px',
-              boxShadow: 'var(--shadow-lg)',
-            }}
-            onClick={(e) => e.stopPropagation()}>
-            <h2 style={{ marginTop: 0 }}>Update Pet Name</h2>
-            <input
-              type="text"
-              value={tempPetName}
-              onChange={(e) => setTempPetName(e.target.value)}
-              placeholder="Enter pet name"
-              style={{
-                width: '100%',
-                padding: 'var(--space-md) var(--space-lg)',
-                fontSize: 'var(--font-size-base)',
-                border: '1px solid var(--color-border)',
-                borderRadius: 'var(--radius-md)',
-                boxSizing: 'border-box',
-                marginBottom: 'var(--space-xl)',
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handleSavePetName();
-                }
-              }}
-            />
-            <div style={{ display: 'flex', gap: 'var(--space-lg)' }}>
-              <button
-                onClick={() => setIsPetNameEditOpen(false)}
-                style={{
-                  flex: 1,
-                  padding: 'var(--space-md) var(--space-lg)',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: 'var(--radius-md)',
-                  backgroundColor: 'transparent',
-                  cursor: 'pointer',
-                  fontSize: 'var(--font-size-base)',
-                }}>
-                Cancel
-              </button>
-              <button
-                onClick={handleSavePetName}
-                style={{
-                  flex: 1,
-                  padding: 'var(--space-md) var(--space-lg)',
-                  border: 'none',
-                  borderRadius: 'var(--radius-md)',
-                  backgroundColor: 'var(--color-primary)',
-                  color: 'var(--color-text-inverse)',
-                  cursor: 'pointer',
-                  fontSize: 'var(--font-size-base)',
-                }}>
-                Save
-              </button>
+        <dialog
+          ref={petNameDialogRef}
+          aria-labelledby="pet-name-title"
+          onClose={() => setIsPetNameEditOpen(false)}>
+          <h2 id="pet-name-title">Update Pet Name</h2>
+          <div className="form-field">
+            <label className="form-label" htmlFor="pet-name">
+              Pet Name
+            </label>
+            <div className="form-input-wrapper">
+              <input
+                id="pet-name"
+                type="text"
+                className="form-input"
+                value={tempPetName}
+                onChange={(e) => setTempPetName(e.target.value)}
+                placeholder="Enter pet name"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSavePetName();
+                  }
+                }}
+              />
             </div>
           </div>
-        </div>
+          <div>
+            <button type="button" onClick={() => setIsPetNameEditOpen(false)}>
+              Cancel
+            </button>
+            <Button onClick={handleSavePetName}>Save</Button>
+          </div>
+        </dialog>
       )}
     </div>
   );

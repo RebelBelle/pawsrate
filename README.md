@@ -22,6 +22,12 @@ Use Node 24 (`.nvmrc`). Run `npm ci` to install locked dependencies, then `npm r
 - `src/components/`: shared components
 - `src/styles/styles.scss`: global stylesheet entry point
 - `src/styles/_tokens.scss`: implemented visual tokens
+- `src/styles/_card.scss`: shared card styles
+- `src/styles/_drawer.scss`: shared drawer styles
+- `src/styles/_rating.scss` and `_button.scss`: shared rating-choice and button styles
+- `src/styles/_form.scss`: form fields, layouts, and form-panel styles
+- `src/styles/_check-radio.scss`: checkbox styles; shared home for radio styles when needed
+- `src/styles/_hero.scss` and `_utilities.scss`: hero layout and shared utilities
 - `src/styles/_mixins.scss` and `_animations.scss`: shared style helpers
 
 Vite compiles SCSS. Do not run a separate Sass watcher or edit generated CSS/maps. Build output and generated source CSS are ignored.

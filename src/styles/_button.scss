@@ -1,0 +1,72 @@
+@use 'mixins' as *;
+
+// Buttons
+
+.btn {
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  flex: 1;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  padding: var(--space-lg) var(--space-xl);
+  transition:
+    background-color var(--transition-fast),
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+
+  &.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-primary-hover);
+    }
+  }
+
+  &.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--color-border);
+    color: var(--color-primary);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-surface-light);
+    }
+  }
+
+  &.btn-icon {
+    @include theme-flex;
+
+    background: none;
+    color: var(--color-text-secondary);
+    padding: 0;
+
+    &:hover {
+      .icon {
+        color: var(--color-text-primary);
+      }
+    }
+
+    &:focus {
+      .icon {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:not(.btn-icon):focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}

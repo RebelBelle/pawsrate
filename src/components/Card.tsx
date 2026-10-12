@@ -1,5 +1,4 @@
 import React from 'react';
-import './Card.scss';
 
 export const Card: React.FC = () => {
   const metrics = [
@@ -15,34 +14,34 @@ export const Card: React.FC = () => {
   ];
 
   return (
-    <article className="dashboard-card">
-      <header className="dashboard-card__header">
+    <article className="card card-overview">
+      <header className="card-header">
         <div>
-          <p className="dashboard-card__eyebrow">Performance</p>
-          <h2 className="dashboard-card__title">Today’s overview</h2>
+          <p className="card-eyebrow">Performance</p>
+          <h2 className="card-title">Today’s overview</h2>
         </div>
-        <p className="dashboard-card__date">May 3</p>
+        <p className="card-date">May 3</p>
       </header>
 
-      <section className="dashboard-card__status">
-        <span className="dashboard-card__status-label">Status</span>
-        <strong className="dashboard-card__status-value">On track</strong>
+      <section className="card-status">
+        <span className="card-status-label">Status</span>
+        <strong className="card-status-value">On track</strong>
       </section>
 
-      <dl className="dashboard-card__metrics" aria-label="Key metrics">
+      <dl className="card-metrics" aria-label="Key metrics">
         {metrics.map((metric) => (
-          <div key={metric.label} className="dashboard-card__metric">
-            <dt className="dashboard-card__metric-label">{metric.label}</dt>
-            <dd className="dashboard-card__metric-value">{metric.value}</dd>
+          <div key={metric.label} className="card-metric">
+            <dt className="card-metric-label">{metric.label}</dt>
+            <dd className="card-metric-value">{metric.value}</dd>
           </div>
         ))}
       </dl>
 
-      <section className="dashboard-card__footer">
-        <p className="dashboard-card__footer-heading">Quick reminders</p>
-        <ul className="dashboard-card__reminders">
+      <section className="card-footer">
+        <p className="card-footer-heading">Quick reminders</p>
+        <ul className="card-reminders">
           {reminders.map((reminder) => (
-            <li key={reminder} className="dashboard-card__reminder">
+            <li key={reminder} className="card-reminder">
               {reminder}
             </li>
           ))}

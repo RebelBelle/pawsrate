@@ -1,22 +1,25 @@
-.dashboard-card {
+.card {
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   display: grid;
   gap: var(--space-lg);
-  max-width: 420px;
   padding: var(--space-xl);
 }
 
-.dashboard-card__header {
+.card-overview {
+  max-width: 420px;
+}
+
+.card-header {
   align-items: flex-start;
   display: flex;
   gap: var(--space-md);
   justify-content: space-between;
 }
 
-.dashboard-card__eyebrow {
+.card-eyebrow {
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
@@ -25,20 +28,20 @@
   text-transform: uppercase;
 }
 
-.dashboard-card__title {
+.card-title {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   margin: 0;
 }
 
-.dashboard-card__date {
+.card-date {
   color: var(--color-text-tertiary);
   font-size: var(--font-size-sm);
   margin: 0;
 }
 
-.dashboard-card__status {
+.card-status {
   align-items: center;
   background-color: var(--color-surface-light);
   border-radius: var(--radius-md);
@@ -47,54 +50,54 @@
   padding: var(--space-sm) var(--space-md);
 }
 
-.dashboard-card__status-label {
+.card-status-label {
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
   margin: 0;
 }
 
-.dashboard-card__status-value {
+.card-status-value {
   color: var(--color-accent);
   font-size: var(--font-size-base);
   margin: 0;
 }
 
-.dashboard-card__metrics {
+.card-metrics {
   display: grid;
   gap: var(--space-md);
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.dashboard-card__metric {
+.card-metric {
   background-color: var(--color-surface-subtle);
   border-radius: var(--radius-md);
   padding: var(--space-md);
 }
 
-.dashboard-card__metric-value {
+.card-metric-value {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-semibold);
   margin: 0 0 var(--space-sm);
 }
 
-.dashboard-card__metric-label {
+.card-metric-label {
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
   margin: 0;
 }
 
-.dashboard-card__footer {
+.card-footer {
   display: grid;
   gap: var(--space-sm);
 }
 
-.dashboard-card__footer-heading {
+.card-footer-heading {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   margin: 0 0 var(--space-sm);
 }
 
-.dashboard-card__reminders {
+.card-reminders {
   display: grid;
   gap: var(--space-sm);
   list-style: none;
@@ -102,7 +105,7 @@
   padding: 0;
 }
 
-.dashboard-card__reminder {
+.card-reminder {
   background-color: var(--color-surface-light);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);

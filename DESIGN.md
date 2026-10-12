@@ -53,7 +53,7 @@ This describes the current implementation, not a completed or accessibility-cert
 | Elevation  | Borders, rounded surfaces, shared shadows, and overlay layers                                          |
 | Theme      | System dark-mode token overrides; full screen consistency still needs review                           |
 
-Global SCSS is loaded through `src/styles/styles.scss`. Card and drawer styles currently remain beside their components. Inline styles, scattered literals, and overlapping global selectors are cleanup work rather than patterns to extend.
+Global SCSS is loaded through `src/styles/styles.scss`. Card styles live in `src/styles/_card.scss`; shared drawer styles live in `src/styles/_drawer.scss`. Rating-choice and button styles live in `_rating.scss` and `_button.scss`. Inline styles, scattered literals, and overlapping global selectors are cleanup work rather than patterns to extend.
 
 ## Foundations for Future Changes
 
