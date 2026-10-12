@@ -28,7 +28,10 @@ export const DashboardPage: React.FC = () => {
         <div>
           <h1 className="dashboard__title">{petName}'s Dash</h1>
         </div>
-        <button type="button" className="dashboard__logout" onClick={handleLogout}>
+        <button
+          type="button"
+          className="dashboard__logout"
+          onClick={handleLogout}>
           Log out
         </button>
       </header>
@@ -46,7 +49,12 @@ export const DashboardPage: React.FC = () => {
 
         <aside className="dashboard__sidebar">
           <section className="dashboard__panel dashboard__panel--details">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
               <h2>Pet Info</h2>
               <button
                 onClick={() => setIsPetNameEditOpen(true)}
@@ -57,12 +65,15 @@ export const DashboardPage: React.FC = () => {
                   fontSize: 'var(--font-size-sm)',
                   color: 'var(--color-primary)',
                   textDecoration: 'underline',
-                }}
-              >
+                }}>
                 Edit
               </button>
             </div>
-            <p style={{ margin: '0.5rem 0 0 0', fontSize: 'var(--font-size-base)' }}>
+            <p
+              style={{
+                margin: '0.5rem 0 0 0',
+                fontSize: 'var(--font-size-base)',
+              }}>
               Name: <strong>{petName}</strong>
             </p>
           </section>
@@ -98,8 +109,7 @@ export const DashboardPage: React.FC = () => {
             justifyContent: 'center',
             zIndex: 2000,
           }}
-          onClick={() => setIsPetNameEditOpen(false)}
-        >
+          onClick={() => setIsPetNameEditOpen(false)}>
           <div
             style={{
               backgroundColor: 'var(--color-background)',
@@ -108,8 +118,7 @@ export const DashboardPage: React.FC = () => {
               maxWidth: '400px',
               boxShadow: 'var(--shadow-lg)',
             }}
-            onClick={(e) => e.stopPropagation()}
-          >
+            onClick={(e) => e.stopPropagation()}>
             <h2 style={{ marginTop: 0 }}>Update Pet Name</h2>
             <input
               type="text"
@@ -142,8 +151,7 @@ export const DashboardPage: React.FC = () => {
                   backgroundColor: 'transparent',
                   cursor: 'pointer',
                   fontSize: 'var(--font-size-base)',
-                }}
-              >
+                }}>
                 Cancel
               </button>
               <button
@@ -157,8 +165,7 @@ export const DashboardPage: React.FC = () => {
                   color: 'var(--color-text-inverse)',
                   cursor: 'pointer',
                   fontSize: 'var(--font-size-base)',
-                }}
-              >
+                }}>
                 Save
               </button>
             </div>

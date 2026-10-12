@@ -1,6 +1,9 @@
 import React, { InputHTMLAttributes } from 'react';
 
-interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+interface CheckboxProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type'
+> {
   label: string;
   labelPosition?: 'left' | 'right';
 }
@@ -17,12 +20,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
 
   return (
     <div className={wrapperClass}>
-      <input
-        type="checkbox"
-        id={id}
-        className={inputClass}
-        {...inputProps}
-      />
+      <input type="checkbox" id={id} className={inputClass} {...inputProps} />
       <label htmlFor={id} className="checkbox__label">
         {label}
       </label>

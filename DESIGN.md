@@ -1,113 +1,37 @@
----
-name: pawsrate
-source_file: PawsRate
-source_page: PawsRate - Concept
-generated_at: 2026-05-08T01:32:08.983Z
----
+# PawsRate Design Guidance
 
-# PawsRate Design Guidelines
+## Purpose
 
-## Source
-- Figma file: PawsRate
-- Figma page: PawsRate - Concept
-- Extracted at: 2026-05-08T01:32:08.983Z
+PawsRate is a personal learning project for tracking pet food preferences: what a pet tried, their reaction, and useful notes. Keep the interface and implementation small, readable, and consistent.
 
-## Color Tokens
-- Gradient Punchy NEW: gradient_linear(#FF6800 0% | #FF3399 100%)
-- Gradient Punchy NEW to Center: gradient_linear(#FF6800 0% | #FF5143 10% | #FF3399 50%, ...)
-- Gradient BG Soft Blur: gradient_linear(#FFF7ED 0% | #FDF2F8 50% | #FAF5FF 100%)
-- Gradient BG Soft Blur Image/Image: gradient_linear(#FFF7ED 0% | #FDF2F8 50% | #FAF5FF 100%) + image
-- Semantics/colors/color-primary: #F3895F
-- Semantics/colors/color-danger: #E53838
-- Semantics/colors/color-success: #14AB6B
-- Semantics/colors/color-warning: #F29912
-- Semantics/colors/color-primary-light: #FDEDE6
-- Semantics/colors/color-success-light: #E0F7ED
-- Semantics/colors/color-danger-light: #FDE2E2
-- Semantics/colors/color-warning-light: #FEF1DC
-- Semantics/colors/color-surface-subtle: #F8F7F8
-- Semantics/colors/color-primary-hover: #E57A52
-- Semantics/colors/color-danger-hover: #B20505
-- Semantics/colors/color-secondary-hover: #FDEDE6
-- Semantics/colors/color-disabled: #E0E0E0
-- Semantics/colors/color-disabled-text: #FFFFFF
-- Semantics/colors/color-white: #FFFFFF
-- Semantics/colors/color-text-primary: #14171C
-- Semantics/colors/color-text-secondary: #737D8C
-- Semantics/colors/color-border: #D1D8E6
-- Semantics/colors/color-danger-ultra-light: #FFF7F7
-- Semantics/colors/color-primary-ultra-light: #FDF7F3
-- Semantics/colors/color-success-ultra-light: #F3FBF7
-- Semantics/colors/color-warning-ultra-light: #FFF8F0
-- Semantics/color-border-NEW: #E1E8F1
-- Semantics/color-text-primary-NEW: #43566B
-- Semantics/color-text-secondary-NEW: #90A5BA
+## Current implementation
 
-## Typography Tokens
-- No local text styles found
+- React components live in `src/components`, with routed screens in `src/pages`.
+- `src/styles/_tokens.scss` is the source of truth for implemented colors, typography, spacing, radii, shadows, and motion timings. It includes system dark-mode overrides.
+- `src/styles/styles.scss` loads shared tokens, mixins, animations, and global component styles. Card and food-rating drawer styles currently remain beside their components.
+- Styles use global SCSS, not SCSS modules. Avoid broad selectors that unintentionally change other components.
+- Open Props is installed, but its stylesheet import is currently disabled.
+- Tokens Studio and automatic Figma synchronization are not connected.
 
-## Spacing Tokens
-- No spacing variables found
+## Visual discipline
 
-## Radius Tokens
-- Semantics/radius/radius-md: 8
-- Semantics/radius/radius-lg: 14
-- Semantics/radius/radius-full: 9999
-- Semantics/radius/radius-sm: 6
-- Semantics/radius/radius-xl: 24
+- Reuse existing semantic tokens and scale steps before adding visual values. Add a token only for a distinct reusable need.
+- Keep foundational values in `_tokens.scss`. Do not use local aliases merely to rename an existing token.
+- Reuse shared components before creating similar controls. Use Lucide for icons.
+- Preserve the existing class vocabulary; keep selectors short and nesting shallow.
+- Check contrast, keyboard focus, labels, and mobile layouts when changing UI. Passing lint does not establish accessibility.
+- Current inline styles and scattered literals are cleanup work, not patterns to extend.
 
-## Motion Tokens
-- No motion variables found
+## Prototype boundaries
 
-## Effect Styles
-- No local effect styles found
+Login navigates to the dashboard without authentication. Signup and password reset are not implemented. Food-rating Save is not connected to persistence. Dashboard metrics, testimonials, and trust counts are sample content, not verified product claims.
 
-## Grid Styles
-- No local grid styles found
+Do not add a backend, authentication service, or persistence framework without an agreed requirement.
 
-## Component Families
-- Avatar
-- Brand
-- Input
-- Password
-- Select
-- Textarea
-- Form Field
-- Badge
-- Toggle
-- Nav Item
-- Card
-- Button
-- Variant=Image, Size=SM
-- Variant=Image, Size=MD
-- Variant=Image, Size=LG
-- Variant=Initials, Size=SM
-- Variant=Initials, Size=MD
-- Variant=Logo
-- Has Icon=False, State=Default, Size=MD
-- Has Icon=False, State=Focus, Size=MD
-- Has Icon=False, State=Filled, Size=MD
-- Has Icon=False, State=Error, Size=MD
-- Has Icon=False, State=Disabled, Size=MD
-- Has Icon=False, State=Default, Size=LG
-- Has Icon=True, State=Default, Size=MD
-- Has Icon=True, State=Focus, Size=MD
-- Has Icon=True, State=Filled, Size=MD
-- Has Icon=True, State=Error, Size=MD
-- Has Icon=True, State=Disabled, Size=MD
-- Has Icon=True, State=Default, Size=LG
-- Visible=False, State=Default, Size=MD
-- Visible=True, State=Focus, Size=MD
-- Visible=False, State=Focus, Size=MD
-- Visible=True, State=Filled, Size=MD
-- Visible=False, State=Filled, Size=MD
-- Visible=True, State=Error, Size=MD
-- Visible=False, State=Error, Size=MD
-- Visible=False, State=Disabled, Size=MD
-- Visible=False, State=Default, Size=LG
-- State=Default, Size=MD
+## Design references and future work
 
-## Editing Notes
-- Refine this file after extraction to add brand context and rationale
-- Keep token names synchronized with Figma styles and variables
-- Add usage examples and anti-patterns for critical components
+The original Figma reference was the **PawsRate** file, **PawsRate - Concept** page, extracted May 8, 2026. The previous version of this document contains that historical extraction in Git history. It is not a synchronized token specification; its values differ from the current implementation.
+
+Kristina-Lemasson and Basal-Instinct guide the development workflow and token discipline. Builder.io PupDine is a future visual reference. Introduce selected theme ideas and components only after the baseline cleanup, translating them into PawsRate's shared tokens and primitives.
+
+When the Figma loop is established, document the actual token mapping and ownership here. Avoid maintaining a second manually copied token catalog.

@@ -1,0 +1,498 @@
+@use 'mixins' as *;
+@use 'animations';
+@use 'tokens' as *;
+
+// @import 'open-props/style'; //TODO: Check what this is?
+
+// ============================================================================
+// RESET & BASE STYLES
+// ============================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  // background-color: var(--color-surface-subtle);
+  background: radial-gradient(
+    circle at left,
+    rgb(255 255 255 / 100%) 0%,
+    rgb(255 240 235 / 100%) 65%
+  );
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: var(--line-height-normal);
+}
+
+#root {
+  height: 100vh;
+}
+
+// Icons
+
+.icon {
+  height: 1.25rem;
+  stroke-width: 2;
+  width: 1.25rem;
+}
+
+// Form Fields
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+
+  .form-label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-tight);
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
+  }
+
+  .form-input {
+    background: transparent;
+    border: none;
+    flex: 1;
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-tight);
+    outline: none;
+    padding: 0;
+
+    &::placeholder {
+      color: var(--color-text-secondary);
+    }
+
+    &:disabled {
+      color: var(--color-text-tertiary);
+      cursor: not-allowed;
+    }
+  }
+}
+
+.form-input-wrapper {
+  align-items: center;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-focus);
+  }
+
+  .icon {
+    color: var(--color-icon-primary);
+    flex-shrink: 0;
+  }
+}
+
+// Checkbox
+
+.checkbox {
+  align-items: center;
+  display: flex;
+  gap: var(--space-md);
+
+  &--left {
+    flex-direction: row-reverse;
+  }
+}
+
+.checkbox__input {
+  appearance: none;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-text-tertiary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 18px;
+  min-height: 18px;
+  min-width: 18px;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+  width: 18px;
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &:checked {
+    background-color: var(--color-primary);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.5 8.5l2.5 2.5 6.5-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+    border-color: var(--color-primary);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.checkbox__label {
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  user-select: none;
+}
+
+// Buttons
+
+.btn {
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+
+  // width: 100%;
+  padding: var(--space-lg);
+  transition:
+    background-color var(--transition-fast),
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+
+  &.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-primary-hover);
+    }
+  }
+
+  &.btn-icon {
+    align-items: center;
+    background: none;
+    color: var(--color-text-secondary);
+    display: flex;
+    justify-content: center;
+    padding: 0;
+
+    &:hover {
+      .icon {
+        color: var(--color-text-primary);
+      }
+    }
+
+    &:focus {
+      .icon {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:not(.btn-icon):focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+// Hero
+
+.hero {
+  align-items: center;
+  background-image: url('../images/chihuahua-with-bowtie-crop.png');
+  background-position: -15% 10%;
+  background-repeat: no-repeat;
+  display: grid;
+  height: 100%;
+
+  .hero-content,
+  .hero-img {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    padding: var(--space-4xl) var(--space-5xl);
+  }
+
+  .hero-img {
+    .hero-text {
+      color: white;
+    }
+  }
+}
+
+@media (width >= 768px) {
+  .hero {
+    grid-template-columns: 1.25fr 1fr;
+  }
+}
+
+// Dashboard
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .dashboard-metrics {
+    display: grid;
+    gap: var(--space-4xl);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .dashboard-body {
+    background-color: #fff;
+    border-radius: var(--radius-lg);
+    flex: 1;
+    margin: var(--space-4xl);
+    padding: var(--space-4xl);
+  }
+}
+
+// ============================================================================
+// FORM PANEL COMPONENT STYLES
+// ============================================================================
+
+// Form Panel Header
+.form-panel__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.form-panel__title {
+  color: var(--color-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  margin: 0;
+  padding: 0;
+}
+
+.form-panel__subtitle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+// Form Container
+.form-panel__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  width: 100%;
+}
+
+// Remember Row (checkbox + label + forgot link)
+.form-panel__remember-row {
+  align-items: center;
+  display: flex;
+  gap: var(--space-lg);
+  justify-content: space-between;
+  padding: var(--space-sm) 0 var(--space-md) 0;
+  width: 100%;
+}
+
+.form-panel__remember-left {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: var(--space-md);
+}
+
+// Remember Label
+.form-panel__remember-label {
+  color: var(--color-text-disabled);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+// Forgot Password Button
+.form-panel__forgot-button {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  padding: 0;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+// Paw Divider (trust section)
+.form-panel__paw-divider {
+  align-items: center;
+  display: flex;
+  gap: var(--space-lg);
+  justify-content: center;
+  width: 100%;
+}
+
+.form-panel__paw-icon {
+  color: var(--color-paw-icon);
+  flex-shrink: 0;
+  height: 14px;
+  width: 14px;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.form-panel__tagline {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  white-space: nowrap;
+}
+
+// ============================================================================
+// RESPONSIVE DESIGN
+// ============================================================================
+
+@media (width <= 768px) {
+  .form-panel {
+    border-radius: 0;
+    min-height: auto;
+    padding: var(--space-2xl) var(--space-xl);
+    width: 100%;
+  }
+
+  .form-panel__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .form-panel__subtitle {
+    font-size: 13px;
+  }
+
+  .form-panel__paw-divider {
+    flex-wrap: wrap;
+  }
+
+  .form-panel__tagline {
+    order: 2;
+    white-space: normal;
+  }
+}
+
+@media (width <= 480px) {
+  .form-panel {
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  .form-panel__title {
+    font-size: 28px;
+  }
+
+  .form-panel__remember-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+// ============================================================================
+// ACCESSIBILITY
+// ============================================================================
+
+// Utility Classes (optional - use as needed)
+
+.sr-only {
+  border-width: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

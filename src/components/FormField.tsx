@@ -1,7 +1,10 @@
 import React, { InputHTMLAttributes } from 'react';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 
-interface FormFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+interface FormFieldProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type'
+> {
   label: string;
   type: 'email' | 'password' | 'text';
   showPasswordToggle?: boolean;
@@ -37,8 +40,7 @@ export const FormField: React.FC<FormFieldProps> = ({
             type="button"
             onClick={onTogglePassword}
             aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
-            className="btn btn-icon"
-          >
+            className="btn btn-icon">
             {isPasswordVisible ? (
               <EyeOff size={16} className="icon" />
             ) : (

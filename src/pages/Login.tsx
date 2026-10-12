@@ -6,7 +6,7 @@ import { HeroPanel } from '../components/HeroPanel';
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleSignIn = async (data: { email: string; password: string; rememberMe?: boolean }) => {
+  const handleSignIn = async () => {
     // TODO: Implement your authentication logic here
     navigate('/dashboard');
   };
@@ -22,7 +22,11 @@ export const LoginPage: React.FC = () => {
         text="Brandy finally found a food she doesn't just tolerate — she loves it! PawsRate made it so easy to track what works."
       />
       <div className="hero-content">
-        <FormPanel mode="login" onSubmit={handleSignIn} subtitleAction={handleNavigateToSignup} />
+        <FormPanel
+          mode="login"
+          onSubmit={handleSignIn}
+          subtitleAction={handleNavigateToSignup}
+        />
       </div>
     </div>
   );

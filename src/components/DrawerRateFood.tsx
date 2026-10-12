@@ -58,13 +58,10 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
 
   return (
     <>
-      {isOpen && (
-        <div className="drawer-overlay" onClick={onClose} />
-      )}
+      {isOpen && <div className="drawer-overlay" onClick={onClose} />}
       <div
         className={`drawer-panel ${isOpen ? 'drawer-panel--open' : ''}`}
-        style={{ width }}
-      >
+        style={{ width }}>
         {/* Header */}
         <div className="drawer-header">
           <div>
@@ -76,8 +73,7 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
           <button
             className="drawer-close"
             onClick={onClose}
-            aria-label="Close drawer"
-          >
+            aria-label="Close drawer">
             ×
           </button>
         </div>
@@ -106,8 +102,7 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
                 <button
                   key={option.id}
                   className={`rating-button ${formData.rating === option.id ? 'rating-button--selected' : ''}`}
-                  onClick={() => handleRatingChange(option.id)}
-                >
+                  onClick={() => handleRatingChange(option.id)}>
                   {option.label}
                 </button>
               ))}
@@ -124,9 +119,11 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
                   className="form-select"
                   value={formData.foodType}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, foodType: e.target.value }))
-                  }
-                >
+                    setFormData((prev) => ({
+                      ...prev,
+                      foodType: e.target.value,
+                    }))
+                  }>
                   <option value="">Select type</option>
                   <option value="dry_kibble">Dry Kibble</option>
                   <option value="wet_food">Wet Food</option>
@@ -141,7 +138,10 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
                   className="form-input"
                   value={formData.dateTried}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, dateTried: e.target.value }))
+                    setFormData((prev) => ({
+                      ...prev,
+                      dateTried: e.target.value,
+                    }))
                   }
                 />
               </div>

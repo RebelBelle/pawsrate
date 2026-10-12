@@ -1,38 +1,29 @@
 # PawsRate
 
-React + Vite application using TypeScript and SCSS.
-
----
+A React + Vite prototype for tracking pet food preferences, using TypeScript, Lucide icons, and global SCSS. Open Props is installed, but its stylesheet import is currently disabled.
 
 ## Setup
 
-- `npm install`
-- `npm run dev`
+Use Node 24 (`.nvmrc`). Run `npm ci` to install locked dependencies, then `npm run dev` to start the app at http://localhost:5173.
 
-App runs at:  
-http://localhost:5173
+## Verification
 
----
+- `npm run check`: check formatting, JavaScript/TypeScript lint, SCSS lint, types, and the production build
+- `npm run format`: format maintained files
+- `npm run lint:fix`: apply supported code fixes
+- `npm run lint:css:fix`: apply supported stylesheet fixes
+- `npm run build`: check types and build into `dist/`
+- `npm run preview`: preview the production build
 
-## Scripts
+## Structure
 
-- `npm run dev` – start dev server
-- `npm run build` – production build
-- `npm run preview` – preview production build
+- `src/App.tsx`: routing
+- `src/pages/`: page components
+- `src/components/`: shared components
+- `src/styles/styles.scss`: global stylesheet entry point
+- `src/styles/_tokens.scss`: implemented visual tokens
+- `src/styles/_mixins.scss` and `_animations.scss`: shared style helpers
 
----
+Vite compiles SCSS. Do not run a separate Sass watcher or edit generated CSS/maps. Build output and generated source CSS are ignored.
 
-## Project Structure
-
-- `src/App.tsx` – main app shell and routing
-- `src/main.tsx` – app entry point
-- `src/LoginPage.tsx` – login screen
-- `src/CreateAccountPage.tsx` – account creation screen
-- `src/DashboardPage.tsx` – dashboard screen
-- `src/styles/` – global style entrypoints and variables
-
----
-
-## Notes
-
-- Project is actively evolving, so structure and conventions may change
+Read `AGENTS.md` for working rules and `DESIGN.md` for the existing Figma reference. Authentication and food-rating persistence remain prototype work.

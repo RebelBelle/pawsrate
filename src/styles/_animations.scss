@@ -1,0 +1,204 @@
+// TODO: Once project's phase 2 is complete, delete the below animations that are NOT used
+
+.animate-bounce {
+  animation: animate-bounce-y 1s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+  will-change: transform;
+}
+
+.animate-fade-in {
+  animation: animate-fade-in 3s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-pop {
+  animation: animate-pop 1.5s cubic-bezier(0.4, 0.818, 0.74, 1) 1s both;
+  opacity: 0;
+}
+
+.animate-slide-in-up {
+  animation: animate-slide-in-up 1.5s ease-out 1.25s forwards;
+  opacity: 0;
+  transform: translateY(3rem);
+}
+
+@keyframes animate-bounce-y {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-1rem);
+  }
+}
+
+@keyframes animate-crossfade {
+  0%,
+  35%,
+  100% {
+    opacity: 0;
+  }
+
+  50%,
+  85% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-crossfade-five {
+  0%,
+  12%,
+  32%,
+  100% {
+    opacity: 0;
+  }
+
+  20%,
+  28% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-crossfade-last {
+  0%,
+  58.333%,
+  100% {
+    opacity: 0;
+  }
+
+  66.667%,
+  91.667% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-crossfade-middle {
+  0%,
+  25%,
+  75%,
+  100% {
+    opacity: 0;
+  }
+
+  33.333%,
+  66.667% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-pan-two {
+  0%,
+  35% {
+    object-position: center var(--pan-start, 0%);
+    opacity: 0;
+  }
+
+  50% {
+    object-position: center var(--pan-start, 0%);
+    opacity: 1;
+  }
+
+  85% {
+    object-position: center 100%;
+    opacity: 1;
+  }
+
+  100% {
+    object-position: center 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes animate-pan-three {
+  0%,
+  58.333% {
+    object-position: center var(--pan-start, 0%);
+    opacity: 0;
+  }
+
+  66.667% {
+    object-position: center var(--pan-start, 0%);
+    opacity: 1;
+  }
+
+  91.667% {
+    object-position: center 100%;
+    opacity: 1;
+  }
+
+  100% {
+    object-position: center 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes animate-pop {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes animate-reveal-y {
+  from {
+    clip-path: inset(calc(50% - 2px) 0);
+  }
+
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes animate-reveal-content {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes animate-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(var(--slide-from, 100vw));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(var(--slide-to, 3%));
+  }
+}
+
+@keyframes animate-slide-in-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Pan only during each slide's visible interval; reset while hidden
+@media (prefers-reduced-motion: no-preference) {
+  .media-cycle img.animate-pan-two {
+    animation-name: animate-pan-two;
+    animation-timing-function: linear;
+  }
+
+  .media-cycle img.animate-pan-three {
+    animation-name: animate-pan-three;
+    animation-timing-function: linear;
+  }
+}

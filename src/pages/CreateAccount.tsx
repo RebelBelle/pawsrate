@@ -6,7 +6,7 @@ import { HeroPanel } from '../components/HeroPanel';
 export const CreateAccountPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleSignUp = async (data: { email: string; password: string; confirmPassword?: string }) => {
+  const handleSignUp = async () => {
     // TODO: Implement account creation logic here
   };
 
@@ -16,10 +16,7 @@ export const CreateAccountPage: React.FC = () => {
 
   return (
     <div className="hero">
-      <HeroPanel
-        headline="Track every bowl. Love what works."
-        text=""
-      />
+      <HeroPanel headline="Track every bowl. Love what works." text="" />
       <div className="hero-content">
         <FormPanel
           mode="signup"

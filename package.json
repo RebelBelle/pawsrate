@@ -1,16 +1,20 @@
 {
   "name": "pawsrate",
   "version": "1.0.0",
-  "description": "PawsRate - Pet service rating platform",
+  "description": "PawsRate - Pet food preference tracking prototype",
   "type": "module",
-  "main": "src/main.tsx",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --max-warnings 0",
     "type-check": "tsc --noEmit",
-    "format": "prettier --write \"src/**/*.{ts,tsx,scss,css}\""
+    "format": "prettier --write .",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:css": "stylelint \"src/**/*.scss\" --max-warnings 0",
+    "lint:css:fix": "npm run lint:css -- --fix",
+    "format:check": "prettier --check .",
+    "check": "npm run format:check && npm run lint && npm run lint:css && npm run type-check && npm run build"
   },
   "dependencies": {
     "lucide-react": "^0.263.1",
@@ -26,9 +30,20 @@
     "@vitejs/plugin-react": "^4.0.3",
     "sass": "^1.66.1",
     "typescript": "^5.1.6",
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
+    "eslint": "^9.39.0",
+    "@eslint/js": "^9.39.0",
+    "typescript-eslint": "^8.46.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.4.0",
+    "prettier": "^3.6.2",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard-scss": "^16.0.0",
+    "stylelint-order": "^7.0.0"
   },
   "engines": {
-    "node": ">=16.0.0"
-  }
+    "node": ">=24 <25"
+  },
+  "private": true
 }

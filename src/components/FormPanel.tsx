@@ -1,19 +1,7 @@
-/**
- * FormPanel.scss-version.tsx
- * FormPanel component using SCSS classes instead of inline styles
- * Much cleaner JSX markup, all styling in FormPanel.scss
- * 
- * Setup:
- * 1. Import the SCSS file: import './FormPanel.scss'
- * 2. Make sure Vite is configured for SCSS (see vite.config.ts)
- * 3. Use this component the same way as FormPanel.tsx
- */
-
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Button } from './Button';
 import { FormField } from './FormField';
 import { Checkbox } from './Checkbox';
-import '../styles/FormPanel.scss';
 
 interface FormPanelProps {
   mode?: 'login' | 'signup';
@@ -21,7 +9,12 @@ interface FormPanelProps {
   subtitle?: string;
   subtitleAction?: () => void;
   submitText?: string;
-  onSubmit?: (data: { email: string; password: string; confirmPassword?: string; rememberMe?: boolean }) => void | Promise<void>;
+  onSubmit?: (data: {
+    email: string;
+    password: string;
+    confirmPassword?: string;
+    rememberMe?: boolean;
+  }) => void | Promise<void>;
   onToggleAuth?: () => void;
   showRememberMe?: boolean;
   showConfirmPassword?: boolean;
@@ -47,7 +40,8 @@ export const FormPanel: React.FC<FormPanelProps> = ({
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPasswordView, setShowConfirmPasswordView] = useState<boolean>(false);
+  const [showConfirmPasswordView, setShowConfirmPasswordView] =
+    useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -78,8 +72,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
             className="form-panel__subtitle"
             onClick={subtitleAction || onToggleAuth}
             aria-label={subtitle}
-            type="button"
-          >
+            type="button">
             {subtitle}
           </button>
         )}
@@ -127,7 +120,9 @@ export const FormPanel: React.FC<FormPanelProps> = ({
             aria-label="Confirm Password"
             isPasswordVisible={showConfirmPasswordView}
             showPasswordToggle={true}
-            onTogglePassword={() => setShowConfirmPasswordView(!showConfirmPasswordView)}
+            onTogglePassword={() =>
+              setShowConfirmPasswordView(!showConfirmPasswordView)
+            }
           />
         )}
 
@@ -146,15 +141,18 @@ export const FormPanel: React.FC<FormPanelProps> = ({
               type="button"
               className="form-panel__forgot-button"
               onClick={() => {}}
-              aria-label="Forgot password"
-            >
+              aria-label="Forgot password">
               Forgot password?
             </button>
           </div>
         )}
 
         {/* Submit Button */}
-        <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting} loadingText={`${submitText.split(' ')[0]}ing...`}>
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          isLoading={isSubmitting}
+          loadingText={`${submitText.split(' ')[0]}ing...`}>
           {submitText}
         </Button>
       </form>
@@ -162,7 +160,9 @@ export const FormPanel: React.FC<FormPanelProps> = ({
       {/* Paw Divider */}
       <div className="form-panel__paw-divider">
         <PawIcon className="form-panel__paw-icon" />
-        <span className="form-panel__tagline">Trusted by 2,400+ dog parents worldwide</span>
+        <span className="form-panel__tagline">
+          Trusted by 2,400+ dog parents worldwide
+        </span>
         <PawIcon className="form-panel__paw-icon" />
       </div>
     </div>
@@ -177,8 +177,7 @@ const PawIcon: React.FC<{ className?: string }> = ({ className }) => (
     viewBox="0 0 14 14"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={className}
-  >
+    className={className}>
     {/* Top pad */}
     <circle cx="7" cy="2" r="1.5" fill="currentColor" />
     {/* Left pads */}

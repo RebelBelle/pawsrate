@@ -1,0 +1,24 @@
+@mixin theme-flex(
+  $direction: row,
+  $justify: center,
+  $align: center,
+  $wrap: null,
+  $gap: null,
+  $inline: false
+) {
+  align-items: $align;
+
+  @if $inline {
+    display: inline-flex;
+  } @else {
+    display: flex;
+  }
+
+  flex-flow: $direction $wrap;
+
+  @if $gap {
+    gap: $gap;
+  }
+
+  justify-content: $justify;
+}

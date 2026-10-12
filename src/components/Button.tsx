@@ -18,7 +18,11 @@ export const Button: React.FC<ButtonProps> = ({
   const content = isLoading ? (loadingText ?? children) : children;
 
   return (
-    <button type={type} disabled={disabled} className={buttonClassName} {...props}>
+    <button
+      type={type}
+      disabled={disabled}
+      className={buttonClassName}
+      {...props}>
       {content}
     </button>
   );

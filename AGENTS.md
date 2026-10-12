@@ -1,5 +1,7 @@
 # AGENTS.md
 
+Read this file before making changes. Read [DESIGN.md](DESIGN.md) for product and visual guidance, and [README.md](README.md) for setup. Preserve unrelated local changes.
+
 ## Core Principles
 
 - Prefer consistency over cleverness
@@ -17,9 +19,9 @@
 - React
 - Vite
 - TypeScript
-- SCSS modules
+- Global SCSS (compiled by Vite)
 - Lucide icons
-- Tokens Studio (not hooked up yet, but will be soon)
+- Tokens Studio and Figma synchronization are not connected
 - GitHub
 
 ---
@@ -32,23 +34,30 @@ npm run build        # TypeScript + production build
 npm run preview      # Preview production build locally
 npm run lint         # Run ESLint with zero warnings allowed
 npm run type-check   # Run TypeScript type checking
-npm run format       # Format TS/TSX/SCSS/CSS with Prettier
+npm run format       # Format maintained files with Prettier
+npm run format:check # Check formatting without edits
+npm run lint:css     # Check SCSS and alphabetical declarations
+npm run check        # Run formatting, lint, SCSS, types, and build
 ```
 
 ---
+
+Use Node 24 (`.nvmrc`) and `npm ci` for locked installs. Vite compiles styles; do not run a separate Sass watcher or edit generated CSS/maps. Implemented tokens live in `src/styles/_tokens.scss`.
 
 ## Components
 
 Components live in `src/components`
 
 ### Prefer
-- One component per folder
+
+- Keep the current flat component layout; use one focused component per file
 - Extending existing components over creating near-duplicates
 - Composition over inheritance
 - Controlled inputs
 - Reusable shared primitives
 
 ### Avoid
+
 - Large or mixed-responsibility files
 - Prop-heavy APIs
 - Colocating `.scss` files with components
@@ -59,20 +68,23 @@ Components live in `src/components`
 
 ## Styling Rules
 
-Styles live in `src/styles`
+Shared styles live in `src/styles`. `Card.scss` and `DrawerRateFood.scss` currently remain beside their components; do not relocate them as part of unrelated work.
 
 ### Prefer
+
 - Existing CSS variables, Open Props variables, shared tokens, SCSS mixins, and utilities when available
 - Simple, maintainable CSS over overly clever abstractions
 - Consistent spacing, radii, typography, and overall styling
 - Short, readable class names (e.g. `.btn-primary`, `.card-title`)
 - Alphabetical property ordering
+- Existing kebab-case and BEM class names; do not rename unrelated selectors
 - Creation of mixins/utilities only for clearly repeated patterns
 
 ### Avoid
+
 - Deeply-nested or overly verbose naming unless already established in the codebase
 - Duplicating existing style patterns
-- Hardcoded colors when suitable variables exist
+- Raw visual values when suitable shared tokens exist
 - One-off variables, tokens, or abstractions
 
 ---
@@ -80,13 +92,15 @@ Styles live in `src/styles`
 ## Safety and Permissions
 
 Allowed without asking:
+
 - Read/search files
 - List files/directories
 - Run prettier/eslint
 - Run TypeScript checks
-- Run single vitest tests
+- Run the configured checks and production build
 
 Ask first:
+
 - Package installs
 - Git push
 - File deletion or chmod
@@ -97,7 +111,10 @@ Ask first:
 
 ## Existing Architecture
 
-- See `App.tsx` for routing structure
+- See `src/App.tsx` for routing structure
+- `src/main.tsx` loads the global `src/styles/styles.scss` entry point
+- Authentication, account creation, password reset, and food-rating persistence are unfinished prototype behavior
+- There is no configured test runner; do not assume Vitest is installed
 - Follow existing folder and naming conventions
 - Do not reorganize files unless requested
 
@@ -122,14 +139,17 @@ Ask first:
 ## AI Workflow Rules
 
 Before coding:
+
 - Check for existing similar components
 - Reuse patterns already present, unless pattern is bad: then suggest an improved pattern
 
 Before finishing:
-- Check TypeScript types
+
+- Run `npm run check`
 - Check responsiveness
 - Check accessibility
-- Remove dead code/comments
+- Remove dead code/comments within the changed scope
+- Do not treat passing checks as proof of token consistency or accessibility
 
 ---
 
