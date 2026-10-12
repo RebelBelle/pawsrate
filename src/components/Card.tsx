@@ -41,7 +41,7 @@ export const Card: React.FC = () => {
         <p className="card-footer-heading">Quick reminders</p>
         <ul className="card-reminders">
           {reminders.map((reminder) => (
-            <li key={reminder} className="card-reminder">
+            <li key={reminder} className="tile">
               {reminder}
             </li>
           ))}

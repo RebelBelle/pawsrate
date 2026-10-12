@@ -3,11 +3,13 @@
 // Hero
 
 .hero {
+  --layout-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  --layout-gap: 0;
+
   align-items: center;
   background-image: url('../images/chihuahua-with-bowtie-crop.png');
   background-position: -15% 10%;
   background-repeat: no-repeat;
-  display: grid;
   height: 100%;
 
   .hero-content,
@@ -15,20 +17,12 @@
     @include theme-flex($direction: column);
 
     height: 100%;
-    padding: var(--space-4xl) var(--space-5xl);
+    padding: var(--space-4xl);
   }
 
   .hero-img {
     .hero-text {
-      color: white;
+      color: var(--color-text-inverse);
     }
-  }
-}
-
-// Responsive Layouts
-
-@media (width >= 768px) {
-  .hero {
-    grid-template-columns: 1.25fr 1fr;
   }
 }

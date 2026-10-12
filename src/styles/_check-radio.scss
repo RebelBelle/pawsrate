@@ -16,10 +16,12 @@
   border: 1px solid var(--color-text-tertiary);
   border-radius: var(--radius-xs);
   cursor: pointer;
+  display: grid;
   flex-shrink: 0;
   height: 20px;
   min-height: 20px;
   min-width: 20px;
+  place-items: center;
   transition:
     background-color var(--transition-fast),
     border-color var(--transition-fast);
@@ -36,11 +38,16 @@
 
   &:checked {
     background-color: var(--color-primary);
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.5 8.5l2.5 2.5 6.5-7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 16px 16px;
     border-color: var(--color-primary);
+
+    &::before {
+      background-color: var(--color-text-inverse);
+      content: '';
+      height: 16px;
+      mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.5 8.5l2.5 2.5 6.5-7" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>')
+        center / contain no-repeat;
+      width: 16px;
+    }
   }
 
   &:disabled {

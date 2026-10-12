@@ -1,11 +1,9 @@
 :root {
   // Colors - Primary palette
   --color-primary: #ee5f3f;
-  --color-primary-hover: #e67b6f; // TODO
 
   // Colors - Accent
   --color-accent: #ec4899;
-  --color-accent-hover: #a31a6a; // TODO
 
   // Gradients
   --gradient-brand: linear-gradient(
@@ -61,10 +59,11 @@
   --font-size-sm: 12px;
   --font-size-base: 14px;
   --font-size-lg: 18px;
-  --font-size-xl: 20px;
-  --font-size-2xl: 28px;
-  --font-size-3xl: 36px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 40px;
   --font-size-4xl: 48px;
+  --font-size-5xl: 64px;
 
   // Line heights
   --line-height-tight: 1.2;
@@ -98,7 +97,6 @@
     0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -4px rgb(0 0 0 / 10%);
   --shadow-button-hover:
     0 20px 25px -5px rgb(0 0 0 / 10%), 0 8px 10px -6px rgb(0 0 0 / 10%);
-  --shadow-focus: 0 0 0 3px rgb(243 136 125 / 10%);
 
   // Transitions
   --transition-fast: 0.2s ease;
@@ -118,6 +116,12 @@
     --color-text-disabled: #c0c0c0;
     --color-border: #3a3a3a;
     --color-background: #2a2a2a;
+    --gradient-background: linear-gradient(
+      to bottom right,
+      var(--color-background),
+      color-mix(in srgb, var(--color-background) 94%, var(--color-accent)),
+      color-mix(in srgb, var(--color-background) 88%, var(--color-accent))
+    );
     --color-surface-subtle: #1a1712;
     --color-surface-light: #242424;
   }

@@ -8,7 +8,7 @@ export const CreateAccountPage: React.FC = () => {
   };
 
   return (
-    <div className="hero">
+    <div className="hero layout-two-column">
       <HeroPanel headline="Track every bowl. Love what works." text="" />
       <div className="hero-content">
         <FormPanel

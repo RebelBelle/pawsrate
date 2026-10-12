@@ -3,15 +3,20 @@
 // Buttons
 
 .btn {
+  align-items: center;
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
+  display: inline-flex;
   flex: 1;
   font-family: inherit;
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
+  gap: var(--space-md);
+  justify-content: center;
   line-height: var(--line-height-tight);
-  padding: var(--space-lg);
+  padding: var(--space-lg) var(--space-2xl);
+  text-decoration: none;
   transition:
     background-color var(--transition-fast),
     box-shadow var(--transition-fast),
@@ -34,8 +39,8 @@
   }
 
   &.btn-secondary {
-    background-color: transparent;
-    border: 2px solid var(--color-border);
+    background-color: var(--color-background);
+    border: none;
     color: var(--color-primary);
 
     &:hover:not(:disabled) {

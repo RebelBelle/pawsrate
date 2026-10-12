@@ -1,0 +1,19 @@
+.tile {
+  align-items: center;
+  background-color: var(--color-surface-light);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: space-between;
+  line-height: var(--line-height-normal);
+  padding: var(--space-lg);
+}
+
+.tile-positive {
+  background-color: color-mix(
+    in srgb,
+    var(--color-success) 12%,
+    var(--color-background)
+  );
+}

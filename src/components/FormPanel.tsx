@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react';
 import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './Button';
@@ -70,7 +71,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
       {/* Header */}
       <div className="form-panel__header">
         <h1 className="form-panel__title text-gradient">{title}</h1>
-        {subtitle && <h2 className="form-panel__subtitle">{subtitle}</h2>}
+        {subtitle && <p className="form-panel__subtitle">{subtitle}</p>}
       </div>
 
       {/* Form */}
@@ -149,6 +150,9 @@ export const FormPanel: React.FC<FormPanelProps> = ({
           isLoading={isSubmitting}
           loadingText={`${submitText.split(' ')[0]}ing...`}>
           {submitText}
+          {mode === 'login' && (
+            <ArrowRight className="icon" aria-hidden="true" />
+          )}
         </Button>
       </form>
 
