@@ -1,3 +1,4 @@
+import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -46,33 +47,12 @@ const sampleFoods = [
   },
 ];
 
-export const Home = () => (
-  <>
-    <header>
-      <nav className="navbar navbar-expand bg-white">
-        <div className="container">
-          <Link
-            className="navbar-brand d-flex align-items-center"
-            to="/"
-            aria-label="PawsRate Home">
-            PawsRate
-          </Link>
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link className="btn btn-light btn-sm me-2" to="/login">
-                Sign In
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="btn btn-primary btn-sm" to="/signup">
-                Create Account
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+interface HomeProps {
+  isAuthenticated: boolean;
+}
 
+export const Home: React.FC<HomeProps> = ({ isAuthenticated }) => (
+  <>
     <main className="home">
       <section className="home-hero" aria-labelledby="home-title">
         <div className="container">
@@ -88,13 +68,22 @@ export const Home = () => (
                 happiest and healthiest.
               </p>
               <div className="home-actions">
-                <Link className="btn btn-primary" to="/signup">
-                  Get started free{' '}
-                  <ArrowRight className="icon" aria-hidden="true" />
-                </Link>
-                <Link className="btn btn-light" to="/login">
-                  Sign In
-                </Link>
+                {isAuthenticated ? (
+                  <Link className="btn btn-primary" to="/dashboard">
+                    Go to Dashboard{' '}
+                    <ArrowRight className="icon" aria-hidden="true" />
+                  </Link>
+                ) : (
+                  <>
+                    <Link className="btn btn-primary" to="/signup">
+                      Get started free{' '}
+                      <ArrowRight className="icon" aria-hidden="true" />
+                    </Link>
+                    <Link className="btn btn-light" to="/login">
+                      Sign In
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
             <div className="col-lg-6">
@@ -157,10 +146,17 @@ export const Home = () => (
           <div className="card bg-gradient text-white text-center">
             <div className="col-md-8 mx-auto">
               <h2 id="start-title">Ready to understand your fren better?</h2>
-              <Link className="btn btn-light" to="/signup">
-                Create Account{' '}
-                <ArrowRight className="icon" aria-hidden="true" />
-              </Link>
+              {isAuthenticated ? (
+                <Link className="btn btn-light" to="/dashboard">
+                  Open Dashboard{' '}
+                  <ArrowRight className="icon" aria-hidden="true" />
+                </Link>
+              ) : (
+                <Link className="btn btn-light" to="/signup">
+                  Create Account{' '}
+                  <ArrowRight className="icon" aria-hidden="true" />
+                </Link>
+              )}
             </div>
           </div>
         </div>

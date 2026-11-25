@@ -3,11 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { FormPanel } from '../components/FormPanel';
 import { HeroPanel } from '../components/HeroPanel';
 
-export const LoginPage: React.FC = () => {
+interface LoginPageProps {
+  onSignIn: () => void;
+}
+
+export const LoginPage: React.FC<LoginPageProps> = ({ onSignIn }) => {
   const navigate = useNavigate();
 
   const handleSignIn = async () => {
     // TODO: Implement your authentication logic here
+    onSignIn();
     navigate('/dashboard');
   };
 

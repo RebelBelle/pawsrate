@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Card } from '../components/Card';
 import { DrawerRateFood } from '../components/DrawerRateFood';
 import { Button } from '../components/Button';
 import { FormField } from '../components/FormField';
 
 export const DashboardPage: React.FC = () => {
-  const navigate = useNavigate();
   const [petName, setPetName] = useState<string>('Peso');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isPetNameEditOpen, setIsPetNameEditOpen] = useState(false);
@@ -19,10 +17,6 @@ export const DashboardPage: React.FC = () => {
     }
   }, [isPetNameEditOpen]);
 
-  const handleLogout = () => {
-    navigate('/login');
-  };
-
   const handleSavePetName = () => {
     if (tempPetName.trim()) {
       setPetName(tempPetName.trim());
@@ -33,53 +27,34 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="dashboard">
       <header className="dashboard-header">
-        <div>
-          <h1 className="dashboard__title">{petName}'s Dash</h1>
-        </div>
-        <Button
-          type="button"
-          className="btn-light dashboard__logout"
-          onClick={handleLogout}>
-          Log out
-        </Button>
+        <h1 className="dashboard__title">{petName}'s Dash</h1>
       </header>
 
-      <section className="dashboard-metrics">
-        <div className="dashboard__main">
-          <section className="dashboard__panel dashboard__panel--summary">
-            <h2>Summary</h2>
-          </section>
+      <aside className="dashboard__sidebar">
+        <section className="dashboard__panel dashboard__panel--details">
+          <div>
+            <h2>Pet Info</h2>
+            <Button
+              type="button"
+              className="btn-light"
+              onClick={() => {
+                setTempPetName(petName);
+                setIsPetNameEditOpen(true);
+              }}>
+              Edit
+            </Button>
+          </div>
+          <p>
+            Name: <strong>{petName}</strong>
+          </p>
+        </section>
 
-          <section className="dashboard__panel dashboard__panel--activity">
-            <h2>Activity</h2>
-          </section>
-        </div>
+        <section className="dashboard__panel dashboard__panel--quick-actions">
+          <h2>Quick actions</h2>
+          <Button onClick={() => setIsDrawerOpen(true)}>Rate a Food</Button>
+        </section>
+      </aside>
 
-        <aside className="dashboard__sidebar">
-          <section className="dashboard__panel dashboard__panel--details">
-            <div>
-              <h2>Pet Info</h2>
-              <Button
-                type="button"
-                className="btn-light"
-                onClick={() => {
-                  setTempPetName(petName);
-                  setIsPetNameEditOpen(true);
-                }}>
-                Edit
-              </Button>
-            </div>
-            <p>
-              Name: <strong>{petName}</strong>
-            </p>
-          </section>
-
-          <section className="dashboard__panel dashboard__panel--quick-actions">
-            <h2>Quick actions</h2>
-            <Button onClick={() => setIsDrawerOpen(true)}>Rate a Food</Button>
-          </section>
-        </aside>
-      </section>
       <section className="dashboard-body">
         <Card />
       </section>
