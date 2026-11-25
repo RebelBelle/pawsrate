@@ -5,17 +5,20 @@ const features = [
   {
     emoji: '🍖',
     title: 'Track Favorites',
-    description: 'Keep a record of the foods your pet enjoys and watch their preferences evolve',
+    description:
+      'Keep a record of the foods your pet enjoys and watch their preferences evolve',
   },
   {
     emoji: '😢',
     title: 'Note Dislikes',
-    description: 'Remember which foods your pet leaves in the bowl so you know what to avoid next time',
+    description:
+      'Remember which foods your pet leaves in the bowl so you know what to avoid next time',
   },
   {
     emoji: '📝',
     title: 'See Patterns',
-    description: 'Discover what works best for your furry friend’s health so you can make informed decisions',
+    description:
+      'Discover what works best for your furry friend’s health so you can make informed decisions',
   },
 ];
 
@@ -48,19 +51,26 @@ export const Home = () => (
     <header>
       <nav className="navbar navbar-expand bg-white">
         <div className="container">
-          <Link className="navbar-brand d-flex align-items-center" to="/" aria-label="PawsRate Home">
+          <Link
+            className="navbar-brand d-flex align-items-center"
+            to="/"
+            aria-label="PawsRate Home">
             PawsRate
           </Link>
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <button type="button" className="btn btn-light btn-sm me-2">Sign In</button>
+              <Link className="btn btn-light btn-sm me-2" to="/login">
+                Sign In
+              </Link>
             </li>
             <li className="nav-item">
-              <button type="button" className="btn btn-primary btn-sm">Create Account</button>
+              <Link className="btn btn-primary btn-sm" to="/signup">
+                Create Account
+              </Link>
             </li>
           </ul>
         </div>
-      </nav>        
+      </nav>
     </header>
 
     <main className="home">
@@ -74,7 +84,8 @@ export const Home = () => (
                 made simple
               </h1>
               <p className="lead">
-                Track your pet's favorite meals and discover what keeps them happiest and healthiest.
+                Track your pet's favorite meals and discover what keeps them
+                happiest and healthiest.
               </p>
               <div className="home-actions">
                 <Link className="btn btn-primary" to="/signup">
@@ -119,9 +130,7 @@ export const Home = () => (
 
       <section className="home-features" aria-labelledby="features-title">
         <div className="container">
-          <h2
-            id="features-title"
-            className="text-center">
+          <h2 id="features-title" className="text-center">
             Everything You Need
           </h2>
           <p className="lead text-center">
@@ -147,11 +156,10 @@ export const Home = () => (
         <div className="container">
           <div className="card bg-gradient text-white text-center">
             <div className="col-md-8 mx-auto">
-              <h2 id="start-title">
-                Ready to understand your fren better?
-              </h2>
+              <h2 id="start-title">Ready to understand your fren better?</h2>
               <Link className="btn btn-light" to="/signup">
-                Create Account <ArrowRight className="icon" aria-hidden="true" />
+                Create Account{' '}
+                <ArrowRight className="icon" aria-hidden="true" />
               </Link>
             </div>
           </div>

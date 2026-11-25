@@ -9,7 +9,10 @@ export const CreateAccountPage: React.FC = () => {
 
   return (
     <div className="hero layout-two-column">
-      <HeroPanel headline="Track every bowl. Love what works." text="" />
+      <HeroPanel
+        headline="We're glad you're here!"
+        text="Brandy finally found a food she doesn't just tolerate — she loves it! PawsRate made it so easy to track what works."
+      />
       <div className="hero-content">
         <FormPanel
           mode="signup"
