@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Button } from './Button';
+import { FormField } from './FormField';
 
 interface RatingOption {
   id: string;
@@ -62,7 +64,7 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
         className={`drawer-panel ${isOpen ? 'drawer-panel--open' : ''}`}
         style={{ width }}>
         {/* Header */}
-        <div className="drawer-header">
+        <div className="drawer-header" data-bs-theme="dark">
           <div>
             <h2 className="drawer-title">Rate a New Food</h2>
             <p className="drawer-subtitle">
@@ -71,33 +73,24 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
           </div>
           <button
             type="button"
-            className="drawer-close"
+            className="btn-close"
             onClick={onClose}
-            aria-label="Close Drawer">
-            ×
-          </button>
+            aria-label="Close Drawer"></button>
         </div>
 
         {/* Content */}
         <div className="drawer-content">
           {/* Food Name Field */}
-          <div className="form-field">
-            <label className="form-label" htmlFor="food-name">
-              Food Name or Brand
-            </label>
-            <div className="form-control-wrapper">
-              <input
-                id="food-name"
-                type="text"
-                className="form-control"
-                placeholder="Enter food name"
-                value={formData.foodName}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, foodName: e.target.value }))
-                }
-              />
-            </div>
-          </div>
+          <FormField
+            id="food-name"
+            label="Food Name or Brand"
+            type="text"
+            placeholder="Enter food name"
+            value={formData.foodName}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, foodName: e.target.value }))
+            }
+          />
 
           {/* Rating Section */}
           <div className="form-section">
@@ -125,81 +118,58 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
           <div className="form-section">
             <h3 className="form-section-title">Details (Optional)</h3>
             <div className="form-row">
-              <div className="form-field">
-                <label className="form-label" htmlFor="food-type">
-                  Food Type
-                </label>
-                <div className="form-control-wrapper">
-                  <select
-                    id="food-type"
-                    className="form-control"
-                    value={formData.foodType}
-                    onChange={(e) =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        foodType: e.target.value,
-                      }))
-                    }>
-                    <option value="">Select type</option>
-                    <option value="dry_kibble">Dry Kibble</option>
-                    <option value="wet_food">Wet Food</option>
-                    <option value="raw">Raw</option>
-                    <option value="treat">Treat</option>
-                  </select>
-                </div>
-              </div>
-              <div className="form-field">
-                <label className="form-label" htmlFor="date-tried">
-                  Date Tried
-                </label>
-                <div className="form-control-wrapper">
-                  <input
-                    id="date-tried"
-                    type="date"
-                    className="form-control"
-                    value={formData.dateTried}
-                    onChange={(e) =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        dateTried: e.target.value,
-                      }))
-                    }
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Notes Section */}
-          <div className="form-field">
-            <label className="form-label" htmlFor="food-notes">
-              Notes (Optional)
-            </label>
-            <div className="form-control-wrapper">
-              <textarea
-                id="food-notes"
-                className="form-control form-textarea"
-                placeholder="Any observations or notes..."
-                value={formData.notes}
+              <FormField
+                as="select"
+                id="food-type"
+                label="Food Type"
+                value={formData.foodType}
                 onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, notes: e.target.value }))
+                  setFormData((prev) => ({
+                    ...prev,
+                    foodType: e.target.value,
+                  }))
+                }>
+                <option value="">Select type</option>
+                <option value="dry_kibble">Dry Kibble</option>
+                <option value="wet_food">Wet Food</option>
+                <option value="raw">Raw</option>
+                <option value="treat">Treat</option>
+              </FormField>
+              <FormField
+                id="date-tried"
+                label="Date Tried"
+                type="date"
+                value={formData.dateTried}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    dateTried: e.target.value,
+                  }))
                 }
               />
             </div>
           </div>
+
+          {/* Notes Section */}
+          <FormField
+            as="textarea"
+            id="food-notes"
+            label="Notes (Optional)"
+            placeholder="Any observations or notes"
+            rows={3}
+            value={formData.notes}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, notes: e.target.value }))
+            }
+          />
         </div>
 
         {/* Footer Actions */}
         <div className="drawer-footer">
-          <button type="button" className="btn btn-secondary" onClick={onClose}>
+          <Button className="btn-light" onClick={onClose}>
             Cancel
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleSave}>
-            Save
-          </button>
+          </Button>
+          <Button onClick={handleSave}>Save</Button>
         </div>
       </div>
     </>

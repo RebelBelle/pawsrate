@@ -57,26 +57,6 @@
   opacity: 0.95;
 }
 
-.drawer-close {
-  background: none;
-  border: none;
-  color: var(--color-text-inverse);
-  cursor: pointer;
-  flex-shrink: 0;
-  font-size: var(--font-size-xl);
-  padding: 0;
-  transition: opacity var(--transition-fast);
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:focus {
-    outline: 2px solid var(--color-text-inverse);
-    outline-offset: 2px;
-  }
-}
-
 // Content Area
 .drawer-content {
   display: flex;

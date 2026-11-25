@@ -1,6 +1,26 @@
 @use 'mixins' as *;
+@use 'variables' as *;
 
 // Form Fields
+
+.input-group {
+  > .btn-icon {
+    background-color: $input-bg;
+    box-shadow: none;
+  }
+
+  > .input-group-text:first-child {
+    padding: calc($input-btn-padding-x / 2);
+  }
+
+  > :not(:first-child) {
+    border-left-color: transparent;
+  }
+
+  > :not(:last-child) {
+    border-right-color: transparent;
+  }
+}
 
 .form-field {
   @include theme-flex(
@@ -17,48 +37,6 @@
     line-height: var(--line-height-tight);
     margin: 0;
     padding: 0;
-  }
-
-  .form-control {
-    background: transparent;
-    border: none;
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-regular);
-    line-height: var(--line-height-tight);
-    min-width: 0;
-    outline: none;
-    padding: 0;
-    width: 100%;
-
-    &::placeholder {
-      color: var(--color-text-secondary);
-    }
-
-    &:disabled {
-      color: var(--color-text-tertiary);
-      cursor: not-allowed;
-    }
-  }
-}
-
-.form-control-wrapper {
-  @include theme-flex($gap: var(--space-lg));
-
-  background-color: var(--color-background);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  transition: border-color var(--transition-fast);
-
-  &:focus-within {
-    border-color: var(--bs-primary);
-    outline: 2px solid var(--bs-primary);
-    outline-offset: 2px;
-  }
-
-  .icon {
-    color: var(--color-icon-primary);
-    flex-shrink: 0;
   }
 }
 
@@ -87,7 +65,7 @@
   }
 }
 
-.form-textarea {
+textarea.form-control {
   min-height: 100px;
   resize: vertical;
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from '../components/Card';
 import { DrawerRateFood } from '../components/DrawerRateFood';
 import { Button } from '../components/Button';
+import { FormField } from '../components/FormField';
 
 export const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
@@ -35,12 +36,12 @@ export const DashboardPage: React.FC = () => {
         <div>
           <h1 className="dashboard__title">{petName}'s Dash</h1>
         </div>
-        <button
+        <Button
           type="button"
-          className="dashboard__logout"
+          className="btn-light dashboard__logout"
           onClick={handleLogout}>
           Log out
-        </button>
+        </Button>
       </header>
 
       <section className="dashboard-metrics">
@@ -58,14 +59,15 @@ export const DashboardPage: React.FC = () => {
           <section className="dashboard__panel dashboard__panel--details">
             <div>
               <h2>Pet Info</h2>
-              <button
+              <Button
                 type="button"
+                className="btn-light"
                 onClick={() => {
                   setTempPetName(petName);
                   setIsPetNameEditOpen(true);
                 }}>
                 Edit
-              </button>
+              </Button>
             </div>
             <p>
               Name: <strong>{petName}</strong>
@@ -94,30 +96,26 @@ export const DashboardPage: React.FC = () => {
           aria-labelledby="pet-name-title"
           onClose={() => setIsPetNameEditOpen(false)}>
           <h2 id="pet-name-title">Update Pet Name</h2>
-          <div className="form-field">
-            <label className="form-label" htmlFor="pet-name">
-              Pet Name
-            </label>
-            <div className="form-control-wrapper">
-              <input
-                id="pet-name"
-                type="text"
-                className="form-control"
-                value={tempPetName}
-                onChange={(e) => setTempPetName(e.target.value)}
-                placeholder="Enter pet name"
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    handleSavePetName();
-                  }
-                }}
-              />
-            </div>
-          </div>
+          <FormField
+            id="pet-name"
+            label="Pet Name"
+            type="text"
+            value={tempPetName}
+            onChange={(e) => setTempPetName(e.target.value)}
+            placeholder="Enter pet name"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSavePetName();
+              }
+            }}
+          />
           <div>
-            <button type="button" onClick={() => setIsPetNameEditOpen(false)}>
+            <Button
+              type="button"
+              className="btn-light"
+              onClick={() => setIsPetNameEditOpen(false)}>
               Cancel
-            </button>
+            </Button>
             <Button onClick={handleSavePetName}>Save</Button>
           </div>
         </dialog>

@@ -3,6 +3,7 @@
 
 .btn-primary {
   --bs-btn-color: #fff;
+
   background-image: var(--bs-gradient);
 }
 
@@ -36,16 +37,6 @@
 
     &:hover:not(:disabled) {
       background-image: var(--gradient-brand-hover);
-    }
-  }
-
-  &.btn-secondary {
-    background-color: var(--color-background);
-    border: none;
-    color: var(--bs-primary);
-
-    &:hover:not(:disabled) {
-      background-color: var(--color-surface-light);
     }
   }
 

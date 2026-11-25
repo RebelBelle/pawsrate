@@ -133,13 +133,14 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                 onChange={() => setRememberMe(!rememberMe)}
               />
             </div>
-            <button
+            <Button
               type="button"
-              className="link-primary"
+              className="btn-link"
+              size="sm"
               onClick={() => {}}
               aria-label="Forgot password">
               Forgot password?
-            </button>
+            </Button>
           </div>
         )}
 
@@ -158,11 +159,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
 
       <p className="form-panel__help-text">
         {helpText}{' '}
-        <Link
-          className="link-primary"
-          to={mode === 'login' ? '/signup' : '/login'}>
-          {helpLinkText}
-        </Link>
+        <Link to={mode === 'login' ? '/signup' : '/login'}>{helpLinkText}</Link>
       </p>
     </div>
   );
