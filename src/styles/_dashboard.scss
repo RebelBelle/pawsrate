@@ -3,16 +3,8 @@
 .dashboard {
   @include theme-flex($direction: column);
 
-  height: 100%;
-
   .dashboard-header {
     @include theme-flex($justify: space-between);
-  }
-
-  .dashboard-metrics {
-    display: grid;
-    gap: var(--space-4xl);
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
   .dashboard-body {
