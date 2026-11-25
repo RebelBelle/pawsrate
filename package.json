@@ -17,6 +17,7 @@
     "check": "npm run format:check && npm run lint && npm run lint:css && npm run type-check && npm run build"
   },
   "dependencies": {
+    "bootstrap": "^5.3.9",
     "lucide-react": "^0.263.1",
     "open-props": "^1.7.23",
     "react": "^18.2.0",

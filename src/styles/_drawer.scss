@@ -1,10 +1,11 @@
+@use 'variables' as *;
+
 .drawer-overlay {
   background-color: rgb(0 0 0 / 50%);
   height: 100dvh;
   left: 0;
   position: fixed;
   top: 0;
-  transition: opacity var(--transition-normal);
   width: 100vw;
   z-index: 1000;
 }
@@ -12,7 +13,7 @@
 .drawer-panel {
   background-color: var(--color-background);
   border-left: 1px solid var(--color-border);
-  box-shadow: var(--shadow-lg);
+  box-shadow: $card-box-shadow;
   display: flex;
   flex-direction: column;
   height: 100dvh;
@@ -33,7 +34,7 @@
 // Header Section
 .drawer-header {
   align-items: flex-start;
-  background: linear-gradient(135deg, var(--color-primary) 0%, #e8547a 100%);
+  background-image: var(--bs-gradient);
   color: var(--color-text-inverse);
   display: flex;
   flex-shrink: 0;

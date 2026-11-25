@@ -1,11 +1,19 @@
 @use 'mixins' as *;
+@use 'variables' as *;
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  background-image: var(--bs-gradient);
+}
+
+.btn-light {
+  --bs-btn-color: var(--bs-primary);
+}
 
 // Buttons
 
-.btn {
+/* .btn {
   align-items: center;
-  border: none;
-  border-radius: var(--radius-lg);
   cursor: pointer;
   display: inline-flex;
   flex: 1;
@@ -15,7 +23,6 @@
   gap: var(--space-md);
   justify-content: center;
   line-height: var(--line-height-tight);
-  padding: var(--space-lg) var(--space-2xl);
   text-decoration: none;
   transition:
     background-color var(--transition-fast),
@@ -23,14 +30,8 @@
     opacity var(--transition-fast),
     transform var(--transition-fast);
 
-  &.btn-primary,
-  &.btn-secondary {
-    box-shadow: var(--shadow-button);
-  }
-
   &.btn-primary {
-    background-color: var(--color-primary);
-    background-image: var(--gradient-brand);
+    background-image: var(--bs-gradient);
     color: var(--color-text-inverse);
 
     &:hover:not(:disabled) {
@@ -41,16 +42,11 @@
   &.btn-secondary {
     background-color: var(--color-background);
     border: none;
-    color: var(--color-primary);
+    color: var(--bs-primary);
 
     &:hover:not(:disabled) {
       background-color: var(--color-surface-light);
     }
-  }
-
-  &.btn-primary:hover:not(:disabled),
-  &.btn-secondary:hover:not(:disabled) {
-    box-shadow: var(--shadow-button-hover);
   }
 
   &.btn-icon {
@@ -83,7 +79,8 @@
   }
 
   &:not(.btn-icon):focus {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--bs-primary);
     outline-offset: 2px;
   }
 }
+ */

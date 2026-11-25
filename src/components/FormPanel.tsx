@@ -70,8 +70,8 @@ export const FormPanel: React.FC<FormPanelProps> = ({
     <div className="form-panel">
       {/* Header */}
       <div className="form-panel__header">
-        <h1 className="form-panel__title text-gradient">{title}</h1>
-        {subtitle && <p className="form-panel__subtitle">{subtitle}</p>}
+        <h1 className="text-gradient">{title}</h1>
+        {subtitle && <p className="lead">{subtitle}</p>}
       </div>
 
       {/* Form */}
@@ -164,37 +164,8 @@ export const FormPanel: React.FC<FormPanelProps> = ({
           {helpLinkText}
         </Link>
       </p>
-
-      {/* Paw Divider */}
-      <div className="form-panel__paw-divider">
-        <PawIcon className="form-panel__paw-icon" />
-        <span className="form-panel__tagline">
-          Trusted by 2,400+ dog parents worldwide
-        </span>
-        <PawIcon className="form-panel__paw-icon" />
-      </div>
     </div>
   );
 };
-
-/**
- * Decorative Paw Icon Component
- */
-const PawIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg
-    viewBox="0 0 14 14"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}>
-    {/* Top pad */}
-    <circle cx="7" cy="2" r="1.5" fill="currentColor" />
-    {/* Left pads */}
-    <circle cx="3" cy="6" r="1.5" fill="currentColor" />
-    {/* Right pads */}
-    <circle cx="11" cy="6" r="1.5" fill="currentColor" />
-    {/* Bottom pad */}
-    <circle cx="7" cy="10" r="2" fill="currentColor" />
-  </svg>
-);
 
 export default FormPanel;

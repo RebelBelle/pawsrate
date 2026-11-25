@@ -97,7 +97,7 @@ For real asynchronous features, distinguish loading, empty, success, and error s
 
 - **Figma:** the original reference is the PawsRate file, PawsRate - Concept page, extracted May 8, 2026. The historical extraction remains in Git history and differs from implemented tokens; it is not a synchronized specification.
 - **Workflow references:** Kristina-Lemasson and Basal-Instinct guide engineering restraint, shared foundations, and documentation structure.
-- **Visual reference:** selected Builder.io PupDine theme ideas and components may be adapted after baseline cleanup. Translate their appearance into PawsRate's tokens and primitives rather than importing the full utility styling or architecture.
+- **Former visual reference:** selected Builder.io PupDine ideas were adapted into PawsRate's Home and authentication foundations. PawsRate has no code, asset, package, or stylesheet dependency on that project; future screens need PawsRate-specific direction.
 - **Open Props:** installed, with its stylesheet import currently disabled. Its role in base styles remains undecided; keep any adoption consistent with the existing token source of truth.
 - **Figma loop:** Tokens Studio and automatic synchronization are not connected. Token mapping and ownership need to be agreed when that workflow is established.
 - **Product scope:** authentication and persistence requirements remain open. Do not add services or frameworks without an agreed need.

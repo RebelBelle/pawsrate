@@ -98,11 +98,11 @@ export const DashboardPage: React.FC = () => {
             <label className="form-label" htmlFor="pet-name">
               Pet Name
             </label>
-            <div className="form-input-wrapper">
+            <div className="form-control-wrapper">
               <input
                 id="pet-name"
                 type="text"
-                className="form-input"
+                className="form-control"
                 value={tempPetName}
                 onChange={(e) => setTempPetName(e.target.value)}
                 placeholder="Enter pet name"

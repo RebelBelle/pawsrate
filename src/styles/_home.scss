@@ -1,0 +1,43 @@
+.home-hero,
+.home-features,
+.home-cta {
+  padding-block: var(--space-4xl);
+}
+
+.home-hero__row {
+  --bs-gutter-y: var(--space-4xl);
+
+  align-items: center;
+}
+
+.home-hero__content {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+
+  .btn {
+    flex: 0 1 auto;
+  }
+}
+
+.home-features__row {
+  margin-top: var(--space-4xl);
+  --bs-gutter-y: var(--space-xl);
+
+  .card {
+    height: 100%;
+  }
+}
+
+@media (width <= 768px) {
+  .home-hero,
+  .home-features,
+  .home-cta {
+    padding-block: var(--space-2xl);
+  }
+}

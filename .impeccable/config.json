@@ -1,0 +1,15 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": ["src/styles/styles.scss"],
+        "createdAt": "2026-11-24T16:25:38.201Z",
+        "reason": "user confirmed: PawsRate uses this class for its brand-gradient headings"
+      }
+    ]
+  }
+}

@@ -1,30 +1,11 @@
 :root {
-  // Colors - Primary palette
-  --color-primary: #ee5f3f;
-
-  // Colors - Accent
-  --color-accent: #ec4899;
-
-  // Gradients
-  --gradient-brand: linear-gradient(
-    to right,
-    var(--color-primary),
-    var(--color-accent)
-  );
   --gradient-brand-hover: linear-gradient(
     to right,
-    color-mix(in oklab, var(--color-primary) 94%, black),
+    color-mix(in oklab, var(--bs-primary) 94%, black),
     color-mix(in oklab, var(--color-accent) 94%, black)
-  );
-  --gradient-background: linear-gradient(
-    to bottom right,
-    #fff7ed,
-    #fdf2f8,
-    #faf5ff
   );
 
   // Colors - Semantic Text
-  --color-text-primary: #334155;
   --color-text-secondary: #727b8e;
   --color-text-tertiary: #999;
   --color-text-disabled: #444;
@@ -35,27 +16,18 @@
   --color-background: #fff;
   --color-surface-subtle: #fff0eb;
   --color-surface-light: #f9fafb;
-  --color-error: #ef4444;
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
 
   // Colors - Icon/decorative
   --color-icon-primary: #727b8e;
   --color-paw-icon: #d9d5d0;
 
   // Typography
-  --font-family:
-    'Inter', -apple-system, blinkmacsystemfont, 'Segoe UI', sans-serif;
-  --font-family-mono: 'Monaco', 'Courier New', monospace;
-  --font-weight-light: 300;
   --font-weight-regular: 400;
-  --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-extrabold: 900;
 
   // Font sizes
-  --font-size-xs: 10px;
   --font-size-sm: 12px;
   --font-size-base: 14px;
   --font-size-lg: 18px;
@@ -68,10 +40,8 @@
   // Line heights
   --line-height-tight: 1.2;
   --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
 
   // Spacing scale (4px base)
-  --space-xs: 4px;
   --space-sm: 6px;
   --space-md: 8px;
   --space-lg: 14px;
@@ -79,50 +49,17 @@
   --space-2xl: 32px;
   --space-3xl: 48px;
   --space-4xl: 56px;
-  --space-5xl: 72px;
 
   // Border radius
   --radius-xs: 2px;
-  --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 14px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
 
   // Shadows
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 5%);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 10%);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 10%);
-  --shadow-button:
-    0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -4px rgb(0 0 0 / 10%);
   --shadow-button-hover:
     0 20px 25px -5px rgb(0 0 0 / 10%), 0 8px 10px -6px rgb(0 0 0 / 10%);
 
   // Transitions
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s ease;
-}
-
-// ============================================================================
-// DARK MODE OVERRIDES
-// ============================================================================
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text-primary: #f0f0f0;
-    --color-text-secondary: #a0a0a0;
-    --color-text-tertiary: #757575;
-    --color-text-disabled: #c0c0c0;
-    --color-border: #3a3a3a;
-    --color-background: #2a2a2a;
-    --gradient-background: linear-gradient(
-      to bottom right,
-      var(--color-background),
-      color-mix(in srgb, var(--color-background) 94%, var(--color-accent)),
-      color-mix(in srgb, var(--color-background) 88%, var(--color-accent))
-    );
-    --color-surface-subtle: #1a1712;
-    --color-surface-light: #242424;
-  }
 }

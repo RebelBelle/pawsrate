@@ -9,11 +9,3 @@
   line-height: var(--line-height-normal);
   padding: var(--space-lg);
 }
-
-.tile-positive {
-  background-color: color-mix(
-    in srgb,
-    var(--color-success) 12%,
-    var(--color-background)
-  );
-}

@@ -85,11 +85,11 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
             <label className="form-label" htmlFor="food-name">
               Food Name or Brand
             </label>
-            <div className="form-input-wrapper">
+            <div className="form-control-wrapper">
               <input
                 id="food-name"
                 type="text"
-                className="form-input"
+                className="form-control"
                 placeholder="Enter food name"
                 value={formData.foodName}
                 onChange={(e) =>
@@ -129,10 +129,10 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
                 <label className="form-label" htmlFor="food-type">
                   Food Type
                 </label>
-                <div className="form-input-wrapper">
+                <div className="form-control-wrapper">
                   <select
                     id="food-type"
-                    className="form-input"
+                    className="form-control"
                     value={formData.foodType}
                     onChange={(e) =>
                       setFormData((prev) => ({
@@ -152,11 +152,11 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
                 <label className="form-label" htmlFor="date-tried">
                   Date Tried
                 </label>
-                <div className="form-input-wrapper">
+                <div className="form-control-wrapper">
                   <input
                     id="date-tried"
                     type="date"
-                    className="form-input"
+                    className="form-control"
                     value={formData.dateTried}
                     onChange={(e) =>
                       setFormData((prev) => ({
@@ -175,10 +175,10 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
             <label className="form-label" htmlFor="food-notes">
               Notes (Optional)
             </label>
-            <div className="form-input-wrapper">
+            <div className="form-control-wrapper">
               <textarea
                 id="food-notes"
-                className="form-input form-textarea"
+                className="form-control form-textarea"
                 placeholder="Any observations or notes..."
                 value={formData.notes}
                 onChange={(e) =>

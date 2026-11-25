@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = ({
   type = 'button',
   ...props
 }) => {
-  const buttonClassName = ['btn-primary', className].filter(Boolean).join(' ');
+  const buttonClassName = [className, 'btn-primary'].filter(Boolean).join(' ');
   const content = isLoading ? (loadingText ?? children) : children;
 
   return (

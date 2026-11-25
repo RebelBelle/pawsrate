@@ -28,11 +28,11 @@ export const FormField: React.FC<FormFieldProps> = ({
       <label htmlFor={inputProps.id} className="form-label">
         {label}
       </label>
-      <div className="form-input-wrapper">
+      <div className="form-control-wrapper">
         <Icon size={18} className="icon" />
         <input
           type={type === 'password' && isPasswordVisible ? 'text' : type}
-          className={`form-input ${className}`}
+          className={`form-control ${className}`}
           {...inputProps}
         />
         {showPasswordToggle && onTogglePassword && (

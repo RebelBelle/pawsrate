@@ -28,17 +28,17 @@
   width: 20px;
 
   &:hover {
-    border-color: var(--color-primary);
+    border-color: var(--bs-primary);
   }
 
   &:focus {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--bs-primary);
     outline-offset: 2px;
   }
 
   &:checked {
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
 
     &::before {
       background-color: var(--color-text-inverse);
@@ -57,7 +57,6 @@
 }
 
 .checkbox__label {
-  color: var(--color-text-primary);
   cursor: pointer;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-regular);

@@ -20,6 +20,7 @@ Read this file before making changes. Read [DESIGN.md](DESIGN.md) for product an
 - Vite
 - TypeScript
 - Global SCSS (compiled by Vite)
+- Bootstrap 5
 - Lucide icons
 - Tokens Studio and Figma synchronization are not connected
 - GitHub
@@ -73,6 +74,7 @@ Shared styles live in `src/styles` and load through `styles.scss`. Keep related 
 ### Prefer
 
 - Existing CSS variables, Open Props variables, shared tokens, SCSS mixins, and utilities when available
+- Bootstrap container and grid classes for responsive page structure; named PawsRate classes for page-specific layout rules
 - Simple, maintainable CSS over overly clever abstractions
 - Consistent spacing, radii, typography, and overall styling
 - Short, readable class names (e.g. `.btn-primary`, `.card-title`)

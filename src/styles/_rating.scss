@@ -9,20 +9,21 @@
   background-color: var(--color-background);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
-  color: var(--color-text-primary);
   cursor: pointer;
   font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
   padding: var(--space-lg) var(--space-md);
-  transition: all var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
 
   &:hover {
-    border-color: var(--color-primary);
+    border-color: var(--bs-primary);
   }
 
   &:focus {
-    border-color: var(--color-primary);
-    outline: 2px solid var(--color-primary);
+    border-color: var(--bs-primary);
+    outline: 2px solid var(--bs-primary);
     outline-offset: 2px;
   }
 

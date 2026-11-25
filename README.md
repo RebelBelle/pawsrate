@@ -1,6 +1,6 @@
 # PawsRate
 
-A React + Vite prototype for tracking pet food preferences, using TypeScript, Lucide icons, and global SCSS. Open Props is installed, but its stylesheet import is currently disabled.
+A React + Vite prototype for tracking pet food preferences, using TypeScript, Bootstrap 5 layout primitives, Lucide icons, and global SCSS. Open Props is installed, but its stylesheet import is currently disabled.
 
 ## Setup
 
@@ -31,5 +31,7 @@ Use Node 24 (`.nvmrc`). Run `npm ci` to install locked dependencies, then `npm r
 - `src/styles/_mixins.scss` and `_animations.scss`: shared style helpers
 
 Vite compiles SCSS. Do not run a separate Sass watcher or edit generated CSS/maps. Build output and generated source CSS are ignored.
+
+Use named PawsRate classes for layout-specific spacing and alignment; do not add Bootstrap component or utility bundles unless a concrete need warrants them.
 
 Read `AGENTS.md` for working rules and `DESIGN.md` for the existing Figma reference. Authentication and food-rating persistence remain prototype work.
