@@ -11,6 +11,7 @@ interface DrawerRateFoodProps {
   isOpen: boolean;
   onClose: () => void;
   petName: string;
+  initialFood?: FormData;
   width?: string;
   onSave?: (formData: FormData) => void;
 }
@@ -30,21 +31,29 @@ const RATING_OPTIONS: RatingOption[] = [
   { id: 'neutral', label: 'Meh / Neutral' },
 ];
 
+const createEmptyFormData = (): FormData => ({
+  foodName: '',
+  rating: null,
+  foodType: '',
+  dateTried: '',
+  tags: [],
+  notes: '',
+});
+
 export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
   isOpen,
   onClose,
   petName,
+  initialFood,
   width = '580px',
   onSave,
 }) => {
-  const [formData, setFormData] = useState<FormData>({
-    foodName: '',
-    rating: null,
-    foodType: '',
-    dateTried: '',
-    tags: [],
-    notes: '',
-  });
+  const [formData, setFormData] = useState<FormData>(() =>
+    initialFood
+      ? { ...initialFood, tags: [...initialFood.tags] }
+      : createEmptyFormData(),
+  );
+  const isEditing = initialFood !== undefined;
 
   const handleSave = () => {
     onSave?.(formData);
@@ -66,9 +75,13 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
         {/* Header */}
         <div className="drawer-header" data-bs-theme="dark">
           <div>
-            <h2 className="drawer-title">Rate a New Food</h2>
+            <h2 className="drawer-title">
+              {isEditing ? 'Edit Food' : 'Rate a New Food'}
+            </h2>
             <p className="drawer-subtitle">
-              Add what {petName} tried, how much they liked it, and any notes
+              {isEditing
+                ? "Update this food's rating and details."
+                : `Add what ${petName} tried, how much they liked it, and any notes`}
             </p>
           </div>
           <button
@@ -87,10 +100,18 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
             type="text"
             placeholder="Enter food name"
             value={formData.foodName}
+            readOnly={isEditing}
+            aria-describedby={isEditing ? 'food-name-edit-help' : undefined}
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, foodName: e.target.value }))
             }
           />
+          {isEditing && (
+            <p id="food-name-edit-help" className="form-text">
+              Food name and brand cannot be changed here. Add a new food to
+              track a different one.
+            </p>
+          )}
 
           {/* Rating Section */}
           <div className="form-section">
@@ -169,7 +190,9 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
           <Button className="btn-light" onClick={onClose}>
             Cancel
           </Button>
-          <Button onClick={handleSave}>Save</Button>
+          <Button onClick={handleSave}>
+            {isEditing ? 'Save Changes' : 'Save'}
+          </Button>
         </div>
       </div>
     </>

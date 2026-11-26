@@ -6,7 +6,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'lg';
 }
 
-const BUTTON_VARIANT_CLASSES = ['btn-primary', 'btn-light', 'btn-link'];
+const BUTTON_VARIANT_CLASSES = [
+  'btn-primary',
+  'btn-light',
+  'btn-link',
+  'btn-danger',
+];
 const BUTTON_SIZE_CLASSES = {
   sm: 'btn-sm',
   lg: 'btn-lg',

@@ -1,7 +1,7 @@
 @use 'mixins' as *;
 
 .dashboard {
-  @include theme-flex($direction: column);
+  // @include theme-flex($direction: column);
 
   .dashboard-header {
     @include theme-flex($justify: space-between);

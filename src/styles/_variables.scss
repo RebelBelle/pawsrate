@@ -20,6 +20,9 @@ $gray-900: #372c40;
 // Gradients
 $gradient: linear-gradient(to right, $primary, #ec4899);
 
+// Spacing
+$spacer: 1rem;
+
 // Body
 $body-color: $gray-900;
 $body-secondary-color: rgba($body-color, 0.5);
@@ -63,3 +66,10 @@ $card-border-width: 0;
 $card-border-radius: 24px;
 $card-box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%);
 $card-bg: $white;
+
+// Modals
+$modal-content-border-width: 0;
+$modal-backdrop-bg: $white;
+
+// List Groups
+$list-group-item-padding-y: $spacer;

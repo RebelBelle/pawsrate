@@ -14,19 +14,7 @@ PawsRate is a learning project for recording food preferences: what a pet tried,
 
 **Open questions:** should Open Props remain an optional reference, or should its stylesheet be adopted for a defined, limited role?
 
-## 2. Food Records
-
-**Problem:** the rating drawer accepts a food and reaction but discards it, so the core task cannot be completed.
-
-**System limits:** authentication, storage, and server APIs do not exist. Prototype sample content must not appear to be saved user data.
-
-**Rules:** define the smallest record shape needed for a food, reaction, date, and note before choosing storage. Keep the first persistence choice reversible and local unless a real account requirement changes that boundary.
-
-**Done when:** a user can add, review, edit, and remove their own food records, with clear empty and error states.
-
-**Open questions:** should the first version use local browser storage, and should food type remain part of the first record shape?
-
-## 3. Account Boundary
+## 2. Account Boundary
 
 **Problem:** sign-in, account creation, password reset, and sign-out are present only as prototype navigation.
 
@@ -40,13 +28,12 @@ PawsRate is a learning project for recording food preferences: what a pet tried,
 
 ## Minimum for a Working App
 
-- **Pet profile:** Let users set up and edit a pet; associate each food record with one. Decide whether v1 supports multiple pets.
-- **Durable data:** Keep profiles and food records after reloads; validate required fields and surface save/load failures.
-- **Core verification:** Check profile setup, record add/edit/delete, reload persistence, search, and filters.
+- **Pet profile:** Create a pet profile and associate each food record with one; decide whether v1 supports multiple pets.
+- **Durable data:** Choose reversible local-first storage; keep profiles and food records after reloads; validate required fields and surface save/load failures.
+- **Core verification:** Verify profile creation, reload persistence, and core food-log flows after storage is added.
 
 ## Later
 
 - Let users enter an estimated age, a birthdate, or leave age unknown; calculate age from birthdate for future insights and recommendations.
-- Support editing a food's rating, date, and notes, plus deletion; decide whether name/brand stays fixed so renaming creates a new entry.
 - Review the planned system dark theme after the light foundation is clean.
 - Add automated tests when records or persistence introduce behavior that needs regression coverage.

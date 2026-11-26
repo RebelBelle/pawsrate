@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pencil, X } from 'lucide-react';
+import { MoreHorizontal, Pencil, X } from 'lucide-react';
 import {
   DrawerRateFood,
   type FormData as FoodFormData,
@@ -94,6 +94,12 @@ export const DashboardPage: React.FC = () => {
     knownSensitivities: '',
   });
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [drawerSession, setDrawerSession] = useState(0);
+  const [editingFoodIndex, setEditingFoodIndex] = useState<number | null>(null);
+  const [pendingFoodDeletion, setPendingFoodDeletion] = useState<{
+    index: number;
+    foodName: string;
+  } | null>(null);
   const [loggedFoods, setLoggedFoods] = useState<FoodFormData[]>([]);
   const [isSampleDataLoaded, setIsSampleDataLoaded] = useState(false);
   const [activeFoodFilters, setActiveFoodFilters] = useState<FoodLogFilter[]>([
@@ -102,6 +108,8 @@ export const DashboardPage: React.FC = () => {
   const [foodSearchQuery, setFoodSearchQuery] = useState('');
 
   const petName = petProfile.name;
+  const initialFood =
+    editingFoodIndex === null ? undefined : loggedFoods[editingFoodIndex];
   const ratedFoods = loggedFoods.filter((food) => food.rating !== null);
   const lovedCount = ratedFoods.filter(
     (food) => food.rating === 'loved',
@@ -182,9 +190,42 @@ export const DashboardPage: React.FC = () => {
   };
 
   const handleSaveFood = (food: FoodFormData) => {
-    setLoggedFoods((current) => [...current, food]);
+    setLoggedFoods((current) =>
+      editingFoodIndex === null
+        ? [...current, food]
+        : current.map((currentFood, index) =>
+            index === editingFoodIndex ? food : currentFood,
+          ),
+    );
     setActiveFoodFilters(['all']);
+    setEditingFoodIndex(null);
     setIsDrawerOpen(false);
+  };
+
+  const handleOpenNewFood = () => {
+    setEditingFoodIndex(null);
+    setDrawerSession((currentSession) => currentSession + 1);
+    setIsDrawerOpen(true);
+  };
+
+  const handleEditFood = (index: number) => {
+    setEditingFoodIndex(index);
+    setDrawerSession((currentSession) => currentSession + 1);
+    setIsDrawerOpen(true);
+  };
+
+  const handleConfirmFoodDeletion = () => {
+    if (!pendingFoodDeletion) return;
+
+    setLoggedFoods((current) =>
+      current.filter((_, index) => index !== pendingFoodDeletion.index),
+    );
+
+    if (loggedFoods.length === 1) {
+      setFoodSearchQuery('');
+      setActiveFoodFilters(['all']);
+      setIsSampleDataLoaded(false);
+    }
   };
 
   const handleLoadSampleData = () => {
@@ -251,13 +292,13 @@ export const DashboardPage: React.FC = () => {
             <dt className="small text-body-secondary mb-1">Loved</dt>
             <dd className="fs-4 fw-semibold mb-0 text-nowrap">{lovedCount}</dd>
             <dd className="small text-body-secondary mb-0">
-              {loveRate === null ? 'No ratings yet' : `${loveRate}% of rated foods`}
+              {loveRate === null
+                ? 'No ratings yet'
+                : `${loveRate}% of rated foods`}
             </dd>
           </div>
           <div className="col-12 col-sm-4">
-            <dt className="small text-body-secondary mb-1">
-              Latest Rating
-            </dt>
+            <dt className="small text-body-secondary mb-1">Latest Rating</dt>
             <dd className="fs-4 fw-semibold mb-0 text-nowrap">
               {latestRating}
             </dd>
@@ -330,9 +371,7 @@ export const DashboardPage: React.FC = () => {
               rating after seeing how it goes.
             </p>
             <div className="d-flex flex-wrap gap-2">
-              <Button onClick={() => setIsDrawerOpen(true)}>
-                Rate a New Food
-              </Button>
+              <Button onClick={handleOpenNewFood}>Rate a New Food</Button>
               {import.meta.env.DEV && (
                 <Button className="btn-light" onClick={handleLoadSampleData}>
                   Load Sample Data
@@ -350,9 +389,7 @@ export const DashboardPage: React.FC = () => {
             </Button>
           </div>
         ) : (
-          <ul
-            className="list-group list-group-flush"
-            aria-label="Food log entries">
+          <ul className="list-group" aria-label="Food log entries">
             {filteredFoods.map(({ food, index }) => {
               const ratingLabel = food.rating
                 ? (RATING_LABELS[food.rating] ?? 'Not rated')
@@ -363,15 +400,52 @@ export const DashboardPage: React.FC = () => {
                 : 'bg-secondary-subtle text-secondary-emphasis';
 
               return (
-                <li key={index} className="list-group-item px-0 py-3">
+                <li key={index} className="list-group-item">
                   <article>
-                    <div className="d-flex flex-wrap align-items-center gap-2 mb-2">
-                      <h3 className="h6 mb-0 text-break">
-                        {food.foodName || 'Unnamed food'}
-                      </h3>
-                      <span className={`badge ${ratingBadgeClass}`}>
-                        {ratingLabel}
-                      </span>
+                    <div className="d-flex align-items-start gap-2 mb-2">
+                      <div className="d-flex flex-wrap align-items-center gap-2 flex-grow-1">
+                        <h3 className="h6 mb-0 text-break">
+                          {food.foodName || 'Unnamed food'}
+                        </h3>
+                        <span className={`badge ${ratingBadgeClass}`}>
+                          {ratingLabel}
+                        </span>
+                      </div>
+                      <div className="dropdown flex-shrink-0">
+                        <Button
+                          type="button"
+                          className="btn-light btn-icon rounded-circle"
+                          aria-label={`Actions for ${food.foodName || 'food'}`}
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                          <MoreHorizontal size={18} aria-hidden="true" />
+                        </Button>
+                        <ul className="dropdown-menu dropdown-menu-end">
+                          <li>
+                            <button
+                              type="button"
+                              className="dropdown-item"
+                              onClick={() => handleEditFood(index)}>
+                              Edit
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              type="button"
+                              className="dropdown-item text-danger"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete-food-modal"
+                              onClick={() =>
+                                setPendingFoodDeletion({
+                                  index,
+                                  foodName: food.foodName,
+                                })
+                              }>
+                              Delete
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                     <div className="d-flex flex-wrap gap-2 small text-body-secondary mb-2">
                       <span>
@@ -396,14 +470,61 @@ export const DashboardPage: React.FC = () => {
         )}
       </section>
       {loggedFoods.length > 0 && (
-        <Button onClick={() => setIsDrawerOpen(true)}>Rate a New Food</Button>
+        <Button onClick={handleOpenNewFood}>Rate a New Food</Button>
       )}
       <DrawerRateFood
+        key={drawerSession}
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         petName={petName}
+        initialFood={initialFood}
         onSave={handleSaveFood}
       />
+      <div
+        className="modal fade"
+        id="delete-food-modal"
+        tabIndex={-1}
+        aria-labelledby="delete-food-modal-title"
+        aria-describedby="delete-food-modal-description"
+        aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2 className="modal-title fs-5" id="delete-food-modal-title">
+                Are you sure?
+              </h2>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <p className="mb-0" id="delete-food-modal-description">
+                Once you delete{' '}
+                <strong>{pendingFoodDeletion?.foodName || 'this food'}</strong>,{' '}
+                you can't undo it.
+              </p>
+            </div>
+            <div className="modal-footer">
+              <Button
+                type="button"
+                className="btn-light"
+                data-bs-dismiss="modal">
+                Cancel
+              </Button>
+              <Button
+                type="button"
+                className="btn-danger"
+                data-bs-dismiss="modal"
+                disabled={!pendingFoodDeletion}
+                onClick={handleConfirmFoodDeletion}>
+                Delete
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
       <PetProfileModal profile={petProfile} onSave={handleSavePetProfile} />
     </main>
   );
