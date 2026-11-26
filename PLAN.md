@@ -6,7 +6,7 @@ PawsRate is a learning project for recording food preferences: what a pet tried,
 
 **Problem:** the initial visual work established useful global partials and tokens, but some older styles, unused animation code, raw visual values, and overlapping card/dashboard rules remain.
 
-**System limits:** styles are global SCSS compiled by Vite. `_tokens.scss` is the sole implemented token source; Open Props is installed but not loaded. The app has no component-library or token-build pipeline.
+**System limits:** styles are global SCSS compiled by Vite. `_tokens.scss` is the sole implemented token source; the app has no component-library or token-build pipeline.
 
 **Rules:** use semantic tokens for reusable visual roles; keep layout measurements local when they are not a shared role; retain only selectors and tokens with a current purpose; preserve the existing global-SCSS approach.
 
@@ -57,3 +57,6 @@ Build a Node validation script (npm run validate:foods) that checks src/data/pet
 - Let users enter an estimated age, a birthdate, or leave age unknown; calculate age from birthdate for future insights and recommendations.
 - Review the planned system dark theme after the light foundation is clean.
 - Add automated tests when records or persistence introduce behavior that needs regression coverage.
+- Relevant Reminders / Watchlist (Optional)
+-- Short, food-specific notes like "Check stomach reaction after salmon topper" or "Reorder freeze-dried treats"—replacing leftover unrelated placeholders.
+-- Why it matters: A small checklist or reminder strip is helpful only when tied to the pet's food routine. Keeping it tight helps you practice scope restraint—knowing what to cut so the food log stays front and center.
