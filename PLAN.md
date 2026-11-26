@@ -14,21 +14,7 @@ PawsRate is a learning project for recording food preferences: what a pet tried,
 
 **Open questions:** should Open Props remain an optional reference, or should its stylesheet be adopted for a defined, limited role?
 
-## 2. Retire the PupDine Reference
-
-**Problem:** PupDine was used as a temporary visual reference, and keeping it as an active dependency would blur ownership of PawsRate’s design decisions.
-
-**Built:** PawsRate now carries the selected Home and Sign In ideas: responsive two-column structure, feature-card and reminder patterns, brand gradients, auth controls, checkbox sizing, and button elevation. Create Account follows PawsRate’s matching auth pattern.
-
-**System limits:** PupDine has no usable Create Account, dashboard, or pet-record screen to adapt. PawsRate imports no PupDine code, assets, packages, or styles.
-
-**Rules:** PawsRate’s tokens, global SCSS, and product context are now the source of truth. Future visual work starts from PawsRate user tasks rather than from PupDine.
-
-**Done when:** desktop and mobile visual QA confirms the adopted patterns, dark mode has been reviewed as its own theme, and the PupDine directory can be deleted without affecting PawsRate.
-
-**Open questions:** none. Food ratings, dashboard, and pet records need original PawsRate direction.
-
-## 3. Food Records
+## 2. Food Records
 
 **Problem:** the rating drawer accepts a food and reaction but discards it, so the core task cannot be completed.
 
@@ -40,19 +26,7 @@ PawsRate is a learning project for recording food preferences: what a pet tried,
 
 **Open questions:** should the first version use local browser storage, and should food type remain part of the first record shape?
 
-## 4. Useful Pet Overview
-
-**Problem:** the dashboard is still placeholder content, so it does not help a user revisit food preferences.
-
-**System limits:** its content must follow the records actually available; it cannot claim trends or metrics that the prototype does not compute.
-
-**Rules:** build from confirmed user tasks and saved-record states. Reuse the cleaned foundations and avoid dashboard-specific abstractions until a repeated need is proven.
-
-**Done when:** the overview helps a user find recent records and understand their pet's preferences without sample metrics standing in for real data.
-
-**Open questions:** which record filters or summaries are useful enough for the first working version?
-
-## 5. Account Boundary
+## 3. Account Boundary
 
 **Problem:** sign-in, account creation, password reset, and sign-out are present only as prototype navigation.
 
@@ -64,19 +38,15 @@ PawsRate is a learning project for recording food preferences: what a pet tried,
 
 **Open questions:** is PawsRate intended to remain a local personal tracker, or does it need user accounts and synchronized data?
 
-## 6. Design-to-Code Workflow
+## Minimum for a Working App
 
-**Problem:** tokens are hand-maintained and Figma synchronization is not connected, so design and implementation can drift.
-
-**System limits:** Tokens Studio and Figma automation are not configured. A small project should not add a build pipeline without a repeatable use case.
-
-**Rules:** establish token naming, ownership, and one manual synchronization pass before automating anything. Keep the code token source authoritative until a replacement workflow is proven.
-
-**Done when:** a small, repeatable Figma-to-code and code-to-Figma exercise can update a shared token set without ambiguous ownership.
-
-**Open questions:** which tokens and component states belong in the first Figma exercise?
+- **Pet profile:** Let users set up and edit a pet; associate each food record with one. Decide whether v1 supports multiple pets.
+- **Durable data:** Keep profiles and food records after reloads; validate required fields and surface save/load failures.
+- **Core verification:** Check profile setup, record add/edit/delete, reload persistence, search, and filters.
 
 ## Later
 
+- Let users enter an estimated age, a birthdate, or leave age unknown; calculate age from birthdate for future insights and recommendations.
+- Support editing a food's rating, date, and notes, plus deletion; decide whether name/brand stays fixed so renaming creates a new entry.
 - Review the planned system dark theme after the light foundation is clean.
 - Add automated tests when records or persistence introduce behavior that needs regression coverage.

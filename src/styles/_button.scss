@@ -11,6 +11,15 @@
   --bs-btn-color: var(--bs-primary);
 }
 
+.btn-icon {
+  align-items: center;
+  display: inline-flex;
+  height: 2.5rem;
+  justify-content: center;
+  padding: 0;
+  width: 2.5rem;
+}
+
 // Buttons
 
 /* .btn {

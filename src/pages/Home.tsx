@@ -88,29 +88,31 @@ export const Home: React.FC<HomeProps> = ({ isAuthenticated }) => (
             </div>
             <div className="col-lg-6">
               <aside className="card" aria-labelledby="sample-title">
-                <header>
-                  <p className="card-eyebrow">Sample Diary</p>
-                  <h2 id="sample-title" className="card-title text-center">
-                    Max’s Favorites
-                  </h2>
-                </header>
-                <ul className="card-reminders">
-                  {sampleFoods.map((food) => (
-                    <li
-                      key={food.name}
-                      className={['tile', food.tileClass]
-                        .filter(Boolean)
-                        .join(' ')}>
-                      <span>
-                        <span aria-hidden="true">{food.emoji}</span> {food.name}
-                      </span>
-                      <strong>
-                        <span aria-hidden="true">{food.reactionEmoji}</span>{' '}
-                        {food.reaction}
-                      </strong>
-                    </li>
-                  ))}
-                </ul>
+                <div className="card-body">
+                  <header>
+                    <p className="card-eyebrow">Sample Diary</p>
+                    <h2 id="sample-title" className="card-title text-center">
+                      Max’s Favorites
+                    </h2>
+                  </header>
+                  <ul className="card-reminders">
+                    {sampleFoods.map((food) => (
+                      <li
+                        key={food.name}
+                        className={['tile', food.tileClass]
+                          .filter(Boolean)
+                          .join(' ')}>
+                        <span>
+                          <span aria-hidden="true">{food.emoji}</span> {food.name}
+                        </span>
+                        <strong>
+                          <span aria-hidden="true">{food.reactionEmoji}</span>{' '}
+                          {food.reaction}
+                        </strong>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </aside>
             </div>
           </div>
@@ -129,11 +131,13 @@ export const Home: React.FC<HomeProps> = ({ isAuthenticated }) => (
             {features.map((feature) => (
               <div key={feature.title} className="col-md-4">
                 <article className="card">
-                  <span className="card-emoji" aria-hidden="true">
-                    {feature.emoji}
-                  </span>
-                  <h3 className="card-title">{feature.title}</h3>
-                  <p className="card-text">{feature.description}</p>
+                  <div className="card-body">
+                    <span className="card-emoji" aria-hidden="true">
+                      {feature.emoji}
+                    </span>
+                    <h3 className="card-title">{feature.title}</h3>
+                    <p className="card-text">{feature.description}</p>
+                  </div>
                 </article>
               </div>
             ))}

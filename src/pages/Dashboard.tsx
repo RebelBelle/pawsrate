@@ -1,10 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { Pencil, X } from 'lucide-react';
 import {
   DrawerRateFood,
   type FormData as FoodFormData,
 } from '../components/DrawerRateFood';
 import { Button } from '../components/Button';
 import { FormField } from '../components/FormField';
+import {
+  PetProfileModal,
+  type PetProfile,
+} from '../components/PetProfileModal';
 
 const RATING_LABELS: Record<string, string> = {
   loved: 'Loved It',
@@ -12,13 +17,14 @@ const RATING_LABELS: Record<string, string> = {
   neutral: 'Meh / Neutral',
 };
 
-type FoodLogFilter = 'all' | 'loved' | 'neutral' | 'not_fan';
+type FoodLogFilter = 'all' | 'loved' | 'neutral' | 'not_fan' | 'still_testing';
 
 const FOOD_LOG_FILTERS: { value: FoodLogFilter; label: string }[] = [
   { value: 'all', label: 'All' },
   { value: 'loved', label: 'Loved' },
   { value: 'neutral', label: 'Meh' },
   { value: 'not_fan', label: 'Not a Fan' },
+  { value: 'still_testing', label: 'Still Testing' },
 ];
 
 const FOOD_TYPE_LABELS: Record<string, string> = {
@@ -75,34 +81,27 @@ const createSampleFoodEntries = (): FoodFormData[] => [
     foodType: 'wet_food',
     dateTried: dateDaysAgo(0),
     tags: [],
-    notes: 'Trying it over a few meals; no reaction recorded yet.',
+    notes: 'Trying it over a few meals; no rating recorded yet.',
   },
 ];
 
-const PET_PROFILE_DETAILS = [
-  { label: 'Age', value: 'Not provided' },
-  { label: 'Weight', value: 'Not provided' },
-  { label: 'Diet Notes', value: 'Not provided' },
-  { label: 'Known Sensitivities', value: 'Not provided' },
-];
-
 export const DashboardPage: React.FC = () => {
-  const [petName, setPetName] = useState<string>('Peso');
+  const [petProfile, setPetProfile] = useState<PetProfile>({
+    name: 'Peso',
+    age: '',
+    weight: '',
+    dietNotes: '',
+    knownSensitivities: '',
+  });
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isPetNameEditOpen, setIsPetNameEditOpen] = useState(false);
-  const [tempPetName, setTempPetName] = useState(petName);
   const [loggedFoods, setLoggedFoods] = useState<FoodFormData[]>([]);
   const [isSampleDataLoaded, setIsSampleDataLoaded] = useState(false);
-  const [activeFoodFilter, setActiveFoodFilter] =
-    useState<FoodLogFilter>('all');
-  const petNameDialogRef = useRef<HTMLDialogElement>(null);
+  const [activeFoodFilters, setActiveFoodFilters] = useState<FoodLogFilter[]>([
+    'all',
+  ]);
+  const [foodSearchQuery, setFoodSearchQuery] = useState('');
 
-  useEffect(() => {
-    if (isPetNameEditOpen) {
-      petNameDialogRef.current?.showModal();
-    }
-  }, [isPetNameEditOpen]);
-
+  const petName = petProfile.name;
   const ratedFoods = loggedFoods.filter((food) => food.rating !== null);
   const lovedCount = ratedFoods.filter(
     (food) => food.rating === 'loved',
@@ -117,40 +116,80 @@ export const DashboardPage: React.FC = () => {
       const dateOrder = b.food.dateTried.localeCompare(a.food.dateTried);
       return dateOrder || b.index - a.index;
     });
-  const filteredFoods = chronologicalFoods.filter(
-    ({ food }) =>
-      activeFoodFilter === 'all' || food.rating === activeFoodFilter,
-  );
+  const normalizedFoodSearchQuery = foodSearchQuery.trim().toLowerCase();
+  const hasActiveFoodLogFilters =
+    normalizedFoodSearchQuery.length > 0 || !activeFoodFilters.includes('all');
+  const filteredFoods = chronologicalFoods.filter(({ food }) => {
+    const matchesFilter =
+      activeFoodFilters.includes('all') ||
+      activeFoodFilters.some((filter) =>
+        filter === 'still_testing'
+          ? food.rating === null
+          : food.rating === filter,
+      );
+    const searchableText = `${food.foodName} ${food.notes}`.toLowerCase();
+    const matchesSearch = searchableText.includes(normalizedFoodSearchQuery);
+
+    return matchesFilter && matchesSearch;
+  });
   const latestFood =
     chronologicalFoods.length > 0 ? chronologicalFoods[0].food : undefined;
-  const latestReaction = latestFood
+  const latestRating = latestFood
     ? latestFood.rating
       ? (RATING_LABELS[latestFood.rating] ?? 'Not rated')
       : 'Still testing'
     : 'None yet';
   const petMonogram = petName.trim().slice(0, 2).toUpperCase();
+  const petProfileDetails = [
+    { label: 'Age', value: petProfile.age || 'Not provided' },
+    { label: 'Weight', value: petProfile.weight || 'Not provided' },
+    { label: 'Diet Notes', value: petProfile.dietNotes || 'Not provided' },
+    {
+      label: 'Known Sensitivities',
+      value: petProfile.knownSensitivities || 'Not provided',
+    },
+  ];
 
-  const handleSavePetName = () => {
-    if (tempPetName.trim()) {
-      setPetName(tempPetName.trim());
-      setIsPetNameEditOpen(false);
+  const handleSavePetProfile = (updatedPetProfile: PetProfile) =>
+    setPetProfile(updatedPetProfile);
+
+  const handleFoodFilterToggle = (filter: FoodLogFilter) => {
+    if (filter === 'all') {
+      setActiveFoodFilters(['all']);
+      return;
     }
+
+    setActiveFoodFilters((currentFilters) => {
+      const nextFilters = currentFilters.includes(filter)
+        ? currentFilters.filter((currentFilter) => currentFilter !== filter)
+        : [
+            ...currentFilters.filter(
+              (currentFilter) => currentFilter !== 'all',
+            ),
+            filter,
+          ];
+
+      return nextFilters.length === 0 ||
+        nextFilters.length === FOOD_LOG_FILTERS.length - 1
+        ? ['all']
+        : nextFilters;
+    });
   };
 
-  const handleOpenPetNameEditor = () => {
-    setTempPetName(petName);
-    setIsPetNameEditOpen(true);
+  const handleClearFoodLogFilters = () => {
+    setFoodSearchQuery('');
+    setActiveFoodFilters(['all']);
   };
 
   const handleSaveFood = (food: FoodFormData) => {
     setLoggedFoods((current) => [...current, food]);
-    setActiveFoodFilter('all');
+    setActiveFoodFilters(['all']);
     setIsDrawerOpen(false);
   };
 
   const handleLoadSampleData = () => {
     setLoggedFoods(createSampleFoodEntries());
-    setActiveFoodFilter('all');
+    setActiveFoodFilters(['all']);
     setIsSampleDataLoaded(true);
   };
 
@@ -179,13 +218,15 @@ export const DashboardPage: React.FC = () => {
             <Button
               type="button"
               size="sm"
-              className="btn-light"
-              onClick={handleOpenPetNameEditor}>
-              Edit Name
+              className="btn-light btn-icon rounded-circle"
+              aria-label="Edit Pet Profile"
+              data-bs-toggle="modal"
+              data-bs-target="#pet-profile-modal">
+              <Pencil size={16} aria-hidden="true" />
             </Button>
           </div>
           <dl className="row row-cols-2 row-cols-lg-4 g-3 mt-3 mb-0">
-            {PET_PROFILE_DETAILS.map(({ label, value }) => (
+            {petProfileDetails.map(({ label, value }) => (
               <div key={label} className="col">
                 <dt className="small text-body-secondary mb-1">{label}</dt>
                 <dd className="mb-0 text-body-secondary">{value}</dd>
@@ -210,15 +251,15 @@ export const DashboardPage: React.FC = () => {
             <dt className="small text-body-secondary mb-1">Loved</dt>
             <dd className="fs-4 fw-semibold mb-0 text-nowrap">{lovedCount}</dd>
             <dd className="small text-body-secondary mb-0">
-              {loveRate === null ? 'No ratings yet' : `${loveRate}% of foods`}
+              {loveRate === null ? 'No ratings yet' : `${loveRate}% of rated foods`}
             </dd>
           </div>
           <div className="col-12 col-sm-4">
             <dt className="small text-body-secondary mb-1">
-              Most Recent Reaction
+              Latest Rating
             </dt>
             <dd className="fs-4 fw-semibold mb-0 text-nowrap">
-              {latestReaction}
+              {latestRating}
             </dd>
             <dd className="small text-body-secondary mb-0 text-break">
               {latestFood
@@ -231,27 +272,49 @@ export const DashboardPage: React.FC = () => {
 
       <section className="mb-4 px-2" aria-labelledby="food-log-title">
         <h2 id="food-log-title" className="h5 mb-3">
-          Food Log for {petName}
+          {petName}'s Food Log
         </h2>
         {loggedFoods.length > 0 && (
-          <div
-            className="d-flex flex-wrap gap-2 mb-3"
-            role="group"
-            aria-label="Filter food log by reaction">
-            {FOOD_LOG_FILTERS.map((filter) => (
+          <div className="d-flex flex-column flex-md-row align-items-md-end gap-3 mb-3">
+            <div className="flex-grow-1">
+              <FormField
+                id="food-log-search"
+                label="Search Food Log"
+                type="search"
+                placeholder="Food name, brand, or notes"
+                value={foodSearchQuery}
+                onChange={(event) => setFoodSearchQuery(event.target.value)}
+              />
+            </div>
+            <div className="d-flex flex-wrap align-items-center gap-2">
+              <div
+                className="d-flex flex-wrap gap-2"
+                role="group"
+                aria-label="Filter food log by rating">
+                {FOOD_LOG_FILTERS.map((filter) => (
+                  <Button
+                    key={filter.value}
+                    size="sm"
+                    className={
+                      activeFoodFilters.includes(filter.value)
+                        ? 'btn-primary'
+                        : 'btn-light'
+                    }
+                    aria-pressed={activeFoodFilters.includes(filter.value)}
+                    onClick={() => handleFoodFilterToggle(filter.value)}>
+                    {filter.label}
+                  </Button>
+                ))}
+              </div>
               <Button
-                key={filter.value}
                 size="sm"
-                className={
-                  activeFoodFilter === filter.value
-                    ? 'btn-primary'
-                    : 'btn-light'
-                }
-                aria-pressed={activeFoodFilter === filter.value}
-                onClick={() => setActiveFoodFilter(filter.value)}>
-                {filter.label}
+                className="btn-light ms-auto"
+                aria-label="Clear Search and Filters"
+                disabled={!hasActiveFoodLogFilters}
+                onClick={handleClearFoodLogFilters}>
+                <X size={16} aria-hidden="true" />
               </Button>
-            ))}
+            </div>
           </div>
         )}
         {import.meta.env.DEV && isSampleDataLoaded && (
@@ -264,7 +327,7 @@ export const DashboardPage: React.FC = () => {
             <h3 className="h6 mb-2">No foods logged yet</h3>
             <p className="mb-3 text-body-secondary">
               Log a food to start tracking what {petName} tries. You can add a
-              reaction after seeing how it goes.
+              rating after seeing how it goes.
             </p>
             <div className="d-flex flex-wrap gap-2">
               <Button onClick={() => setIsDrawerOpen(true)}>
@@ -280,13 +343,10 @@ export const DashboardPage: React.FC = () => {
         ) : filteredFoods.length === 0 ? (
           <div className="py-3">
             <p className="mb-3 text-body-secondary" role="status">
-              No foods match this filter. Try another reaction or show all
-              foods.
+              No foods match your filters.
             </p>
-            <Button
-              className="btn-light"
-              onClick={() => setActiveFoodFilter('all')}>
-              Show All Foods
+            <Button className="btn-light" onClick={handleClearFoodLogFilters}>
+              Clear Filters
             </Button>
           </div>
         ) : (
@@ -344,37 +404,7 @@ export const DashboardPage: React.FC = () => {
         petName={petName}
         onSave={handleSaveFood}
       />
-
-      {isPetNameEditOpen && (
-        <dialog
-          ref={petNameDialogRef}
-          aria-labelledby="pet-name-title"
-          onClose={() => setIsPetNameEditOpen(false)}>
-          <h2 id="pet-name-title">Update Pet Name</h2>
-          <FormField
-            id="pet-name"
-            label="Pet Name"
-            type="text"
-            value={tempPetName}
-            onChange={(e) => setTempPetName(e.target.value)}
-            placeholder="Enter pet name"
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleSavePetName();
-              }
-            }}
-          />
-          <div>
-            <Button
-              type="button"
-              className="btn-light"
-              onClick={() => setIsPetNameEditOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={handleSavePetName}>Save</Button>
-          </div>
-        </dialog>
-      )}
+      <PetProfileModal profile={petProfile} onSave={handleSavePetProfile} />
     </main>
   );
 };
