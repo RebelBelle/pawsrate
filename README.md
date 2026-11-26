@@ -6,6 +6,8 @@ A React + Vite prototype for tracking pet food preferences, using TypeScript, Bo
 
 Use Node 24 (`.nvmrc`). Run `npm ci` to install locked dependencies, then `npm run dev` to start the app at http://localhost:5173.
 
+The food autocomplete is a UI prototype without a connected suggestion source. New food entry remains disabled until suggestions are available.
+
 ## Verification
 
 - `npm run check`: check formatting, JavaScript/TypeScript lint, SCSS lint, types, and the production build

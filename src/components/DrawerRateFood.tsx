@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Button } from './Button';
 import { FormField } from './FormField';
+import {
+  FoodAutocomplete,
+  type FoodAutocompleteOption,
+} from './FoodAutocomplete';
 
 interface RatingOption {
   id: string;
@@ -40,6 +44,24 @@ const createEmptyFormData = (): FormData => ({
   notes: '',
 });
 
+const ProductImage: React.FC<{ imageUrl?: string; productName: string }> = ({
+  imageUrl,
+  productName,
+}) => {
+  const [hasImageError, setHasImageError] = useState(false);
+  if (!imageUrl || hasImageError) return null;
+
+  return (
+    <img
+      className="autocomplete__image"
+      src={imageUrl}
+      alt={`Product image for ${productName}`}
+      loading="lazy"
+      onError={() => setHasImageError(true)}
+    />
+  );
+};
+
 export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
   isOpen,
   onClose,
@@ -53,10 +75,22 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
       ? { ...initialFood, tags: [...initialFood.tags] }
       : createEmptyFormData(),
   );
+  const [selectedProduct, setSelectedProduct] =
+    useState<FoodAutocompleteOption | null>(null);
   const isEditing = initialFood !== undefined;
+
+  const handleFoodNameChange = (foodName: string) => {
+    setFormData((prev) => ({ ...prev, foodName }));
+    setSelectedProduct(null);
+  };
 
   const handleSave = () => {
     onSave?.(formData);
+  };
+
+  const handleSelectProduct = (product: FoodAutocompleteOption) => {
+    setFormData((prev) => ({ ...prev, foodName: product.displayName }));
+    setSelectedProduct(product);
   };
 
   const handleRatingChange = (ratingId: string) => {
@@ -94,18 +128,89 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
         {/* Content */}
         <div className="drawer-content">
           {/* Food Name Field */}
-          <FormField
-            id="food-name"
-            label="Food Name or Brand"
-            type="text"
-            placeholder="Enter food name"
-            value={formData.foodName}
-            readOnly={isEditing}
-            aria-describedby={isEditing ? 'food-name-edit-help' : undefined}
-            onChange={(e) =>
-              setFormData((prev) => ({ ...prev, foodName: e.target.value }))
-            }
-          />
+          <div className="autocomplete-group">
+            {isEditing ? (
+              <FormField
+                id="food-name"
+                label="Food Name or Brand"
+                type="text"
+                placeholder="Enter food name"
+                value={formData.foodName}
+                readOnly
+                aria-describedby="food-name-edit-help"
+                onChange={(e) => handleFoodNameChange(e.target.value)}
+              />
+            ) : (
+              <FoodAutocomplete
+                id="food-name"
+                label="Food Name or Brand"
+                value={formData.foodName}
+                options={[]}
+                selectedProduct={selectedProduct}
+                onChange={handleFoodNameChange}
+                onSelect={handleSelectProduct}
+              />
+            )}
+            {selectedProduct && (
+              <section
+                className="autocomplete__selection"
+                aria-labelledby="selected-product-title">
+                <div className="autocomplete__selection-header">
+                  <div>
+                    <h3
+                      id="selected-product-title"
+                      className="autocomplete__selection-title">
+                      {selectedProduct.displayName}
+                    </h3>
+                    <p className="autocomplete__note">
+                      Optional product details may be incomplete. You can save
+                      this match without them.
+                    </p>
+                  </div>
+                  <ProductImage
+                    key={selectedProduct.id}
+                    imageUrl={selectedProduct.imageUrl}
+                    productName={selectedProduct.displayName}
+                  />
+                </div>
+                {selectedProduct.ingredients && (
+                  <div>
+                    <h4 className="autocomplete__detail-title">Ingredients</h4>
+                    <p className="autocomplete__detail-value">
+                      {selectedProduct.ingredients}
+                    </p>
+                  </div>
+                )}
+                {(selectedProduct.categories?.length ?? 0) > 0 && (
+                  <div>
+                    <h4 className="autocomplete__detail-title">Categories</h4>
+                    <p className="autocomplete__detail-value">
+                      {selectedProduct.categories
+                        ?.map((category) => category.split(':').pop())
+                        .join(', ')}
+                    </p>
+                  </div>
+                )}
+                {selectedProduct.labels && (
+                  <div>
+                    <h4 className="autocomplete__detail-title">Labels</h4>
+                    <p className="autocomplete__detail-value">
+                      {selectedProduct.labels}
+                    </p>
+                  </div>
+                )}
+                {!selectedProduct.imageUrl &&
+                  !selectedProduct.ingredients &&
+                  !selectedProduct.categories?.length &&
+                  !selectedProduct.labels && (
+                    <p className="autocomplete__note">
+                      No optional product details are available. You can still
+                      save this match.
+                    </p>
+                  )}
+              </section>
+            )}
+          </div>
           {isEditing && (
             <p id="food-name-edit-help" className="form-text">
               Food name and brand cannot be changed here. Add a new food to
@@ -190,7 +295,9 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
           <Button className="btn-light" onClick={onClose}>
             Cancel
           </Button>
-          <Button onClick={handleSave}>
+          <Button
+            disabled={!isEditing && selectedProduct === null}
+            onClick={handleSave}>
             {isEditing ? 'Save Changes' : 'Save'}
           </Button>
         </div>

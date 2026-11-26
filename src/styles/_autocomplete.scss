@@ -1,0 +1,123 @@
+.autocomplete-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.autocomplete {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.autocomplete__field {
+  position: relative;
+}
+
+.autocomplete__note {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+.autocomplete__menu {
+  display: block;
+  left: 0;
+  max-height: 18rem;
+  min-width: 0;
+  overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: calc(100% + var(--space-sm));
+  width: 100%;
+  z-index: 1050;
+}
+
+.autocomplete__message {
+  margin: 0;
+  padding: var(--space-md) var(--space-lg);
+
+  &[role='alert'] {
+    color: var(--bs-danger-text-emphasis);
+  }
+}
+
+.autocomplete__options {
+  display: grid;
+  gap: var(--space-sm);
+  list-style: none;
+  margin: 0;
+  padding: var(--space-sm);
+}
+
+.autocomplete__option {
+  align-items: flex-start;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  overflow-wrap: anywhere;
+  white-space: normal;
+
+  &:hover,
+  &--active {
+    background-color: var(--bs-dropdown-link-hover-bg);
+    color: var(--bs-dropdown-link-hover-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+  }
+}
+
+.autocomplete__option-meta {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.autocomplete__selection {
+  background-color: var(--color-surface-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+}
+
+.autocomplete__selection-header {
+  align-items: flex-start;
+  display: flex;
+  gap: var(--space-md);
+  justify-content: space-between;
+}
+
+.autocomplete__selection-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  margin: 0 0 var(--space-sm);
+  overflow-wrap: anywhere;
+}
+
+.autocomplete__image {
+  border-radius: var(--radius-md);
+  flex: 0 0 96px;
+  height: 96px;
+  object-fit: contain;
+  width: 96px;
+}
+
+.autocomplete__detail-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  margin: 0 0 var(--space-sm);
+}
+
+.autocomplete__detail-value {
+  font-size: var(--font-size-sm);
+  margin: 0;
+  max-height: 7rem;
+  overflow: auto;
+  overflow-wrap: anywhere;
+}

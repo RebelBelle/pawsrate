@@ -235,7 +235,7 @@ export const DashboardPage: React.FC = () => {
   };
 
   return (
-    <main className="dashboard">
+    <div className="dashboard">
       <header className="dashboard-header">
         <h1 className="dashboard__title">{petName}'s Dash</h1>
       </header>
@@ -526,6 +526,6 @@ export const DashboardPage: React.FC = () => {
         </div>
       </div>
       <PetProfileModal profile={petProfile} onSave={handleSavePetProfile} />
-    </main>
+    </div>
   );
 };
