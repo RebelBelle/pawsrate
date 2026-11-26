@@ -15,7 +15,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   className = '',
   ...inputProps
 }) => {
-  const wrapperClass = `checkbox checkbox--${labelPosition}`;
+  const wrapperClass =
+    labelPosition === 'left' ? 'checkbox checkbox--left' : 'checkbox';
   const inputClass = `checkbox__input ${className}`;
 
   return (

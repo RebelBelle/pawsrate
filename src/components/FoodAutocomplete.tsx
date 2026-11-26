@@ -111,6 +111,8 @@ export const FoodAutocomplete: React.FC<FoodAutocompleteProps> = ({
         <FormField
           id={id}
           label={label}
+          helpText="Type at least two characters"
+          helpTextId={helpId}
           type="search"
           placeholder="Search food name or brand"
           autoComplete="off"
@@ -175,9 +177,6 @@ export const FoodAutocomplete: React.FC<FoodAutocompleteProps> = ({
           </div>
         )}
       </div>
-      <p id={helpId} className="form-text">
-        Type at least two characters, then select a suggestion to continue.
-      </p>
     </div>
   );
 };

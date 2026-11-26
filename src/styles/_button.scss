@@ -2,7 +2,8 @@
 @use 'variables' as *;
 
 .btn-primary {
-  --bs-btn-color: #fff;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-hover-color: var(--bs-white);
 
   background-image: var(--bs-gradient);
 }
@@ -19,68 +20,3 @@
   padding: 0;
   width: 2.5rem;
 }
-
-// Buttons
-
-/* .btn {
-  align-items: center;
-  cursor: pointer;
-  display: inline-flex;
-  flex: 1;
-  font-family: inherit;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  gap: var(--space-md);
-  justify-content: center;
-  line-height: var(--line-height-tight);
-  text-decoration: none;
-  transition:
-    background-color var(--transition-fast),
-    box-shadow var(--transition-fast),
-    opacity var(--transition-fast),
-    transform var(--transition-fast);
-
-  &.btn-primary {
-    background-image: var(--bs-gradient);
-    color: var(--color-text-inverse);
-
-    &:hover:not(:disabled) {
-      background-image: var(--gradient-brand-hover);
-    }
-  }
-
-  &.btn-icon {
-    @include theme-flex;
-
-    background: none;
-    color: var(--color-text-secondary);
-    padding: 0;
-
-    &:hover {
-      .icon {
-        color: var(--color-text-primary);
-      }
-    }
-
-    &:focus {
-      .icon {
-        color: var(--color-accent);
-      }
-    }
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-
-  &:active:not(:disabled) {
-    transform: scale(0.98);
-  }
-
-  &:not(.btn-icon):focus {
-    outline: 2px solid var(--bs-primary);
-    outline-offset: 2px;
-  }
-}
- */

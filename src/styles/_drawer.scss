@@ -11,8 +11,7 @@
 }
 
 .drawer-panel {
-  background-color: var(--color-background);
-  border-left: 1px solid var(--color-border);
+  background-color: var(--bs-body-bg);
   box-shadow: $card-box-shadow;
   display: flex;
   flex-direction: column;
@@ -35,7 +34,7 @@
 .drawer-header {
   align-items: flex-start;
   background-image: var(--bs-gradient);
-  color: var(--color-text-inverse);
+  color: var(--bs-white);
   display: flex;
   flex-shrink: 0;
   gap: var(--space-lg);
@@ -43,18 +42,10 @@
   padding: var(--space-xl);
 }
 
-.drawer-title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-tight);
-  margin: 0 0 var(--space-sm) 0;
-}
-
 .drawer-subtitle {
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);
   margin: 0;
-  opacity: 0.95;
 }
 
 // Content Area
@@ -69,7 +60,6 @@
 
 // Footer Section
 .drawer-footer {
-  border-top: 1px solid var(--color-border);
   display: flex;
   flex-shrink: 0;
   gap: var(--space-lg);

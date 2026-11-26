@@ -15,7 +15,7 @@
 }
 
 .autocomplete__note {
-  color: var(--color-text-secondary);
+  color: var(--bs-secondary-color);
   font-size: var(--font-size-sm);
   margin: 0;
 }
@@ -72,13 +72,13 @@
 }
 
 .autocomplete__option-meta {
-  color: var(--color-text-secondary);
+  color: var(--bs-secondary-color);
   font-size: var(--font-size-sm);
 }
 
 .autocomplete__selection {
-  background-color: var(--color-surface-light);
-  border: 1px solid var(--color-border);
+  background-color: var(--bs-gray-300);
+  border: 1px solid var(--bs-border-color);
   border-radius: var(--radius-md);
   display: flex;
   flex-direction: column;

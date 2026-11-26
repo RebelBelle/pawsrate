@@ -6,12 +6,4 @@
   .dashboard-header {
     @include theme-flex($justify: space-between);
   }
-
-  .dashboard-body {
-    background-color: var(--color-background);
-    border-radius: var(--radius-lg);
-    flex: 1;
-    margin: var(--space-4xl);
-    padding: var(--space-4xl);
-  }
 }

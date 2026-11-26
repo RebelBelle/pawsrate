@@ -12,8 +12,8 @@
 
 .checkbox__input {
   appearance: none;
-  background-color: var(--color-background);
-  border: 1px solid var(--color-text-tertiary);
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
   border-radius: var(--radius-xs);
   cursor: pointer;
   display: grid;
@@ -41,7 +41,7 @@
     border-color: var(--bs-primary);
 
     &::before {
-      background-color: var(--color-text-inverse);
+      background-color: var(--bs-white);
       content: '';
       height: 16px;
       mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.5 8.5l2.5 2.5 6.5-7" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>')

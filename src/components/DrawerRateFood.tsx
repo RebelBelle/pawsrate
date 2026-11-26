@@ -109,9 +109,7 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
         {/* Header */}
         <div className="drawer-header" data-bs-theme="dark">
           <div>
-            <h2 className="drawer-title">
-              {isEditing ? 'Edit Food' : 'Rate a New Food'}
-            </h2>
+            <h2>{isEditing ? 'Edit Food' : 'Rate a New Food'}</h2>
             <p className="drawer-subtitle">
               {isEditing
                 ? "Update this food's rating and details."
@@ -232,7 +230,7 @@ export const DrawerRateFood: React.FC<DrawerRateFoodProps> = ({
                   type="button"
                   aria-pressed={formData.rating === option.id}
                   key={option.id}
-                  className={`rating-button ${formData.rating === option.id ? 'rating-button--selected' : ''}`}
+                  className={`btn btn-outline-secondary ${formData.rating === option.id ? 'rating-button--selected' : ''}`}
                   onClick={() => handleRatingChange(option.id)}>
                   {option.label}
                 </button>

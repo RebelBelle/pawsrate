@@ -237,7 +237,7 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="dashboard">
       <header className="dashboard-header">
-        <h1 className="dashboard__title">{petName}'s Dash</h1>
+        <h1>{petName}'s Dash</h1>
       </header>
 
       <section className="mb-4 px-2" aria-labelledby="pet-profile-title">
@@ -279,7 +279,7 @@ export const DashboardPage: React.FC = () => {
 
       <section className="mb-4 px-2" aria-labelledby="dashboard-summary-title">
         <h2 id="dashboard-summary-title" className="h5 mb-3">
-          Summary for {petName}
+          {petName}'s Summary
         </h2>
         <dl className="row g-3 mb-0">
           <div className="col-12 col-sm-4">
@@ -321,6 +321,7 @@ export const DashboardPage: React.FC = () => {
               <FormField
                 id="food-log-search"
                 label="Search Food Log"
+                hideLabel
                 type="search"
                 placeholder="Food name, brand, or notes"
                 value={foodSearchQuery}

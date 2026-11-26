@@ -7,6 +7,9 @@ import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 
 interface FormFieldBaseProps {
   label: string;
+  hideLabel?: boolean;
+  helpText?: string;
+  helpTextId?: string;
 }
 
 interface InputFormFieldProps
@@ -41,11 +44,21 @@ type FormFieldProps =
 
 export const FormField: React.FC<FormFieldProps> = (props) => {
   if (props.as === 'select') {
-    const { label, className = '', children, ...selectProps } = props;
+    const {
+      label,
+      hideLabel = false,
+      className = '',
+      children,
+      helpText,
+      helpTextId,
+      ...selectProps
+    } = props;
 
     return (
       <div className="form-field">
-        <label htmlFor={selectProps.id} className="form-label">
+        <label
+          htmlFor={selectProps.id}
+          className={hideLabel ? 'form-label visually-hidden' : 'form-label'}>
           {label}
         </label>
         <select
@@ -53,33 +66,55 @@ export const FormField: React.FC<FormFieldProps> = (props) => {
           {...selectProps}>
           {children}
         </select>
+        {helpText && (
+          <div id={helpTextId} className="form-text">
+            {helpText}
+          </div>
+        )}
       </div>
     );
   }
 
   if (props.as === 'textarea') {
-    const { label, className = '', ...textareaProps } = props;
+    const {
+      label,
+      hideLabel = false,
+      className = '',
+      helpText,
+      helpTextId,
+      ...textareaProps
+    } = props;
 
     return (
       <div className="form-field">
-        <label htmlFor={textareaProps.id} className="form-label">
+        <label
+          htmlFor={textareaProps.id}
+          className={hideLabel ? 'form-label visually-hidden' : 'form-label'}>
           {label}
         </label>
         <textarea
           className={['form-control', className].filter(Boolean).join(' ')}
           {...textareaProps}
         />
+        {helpText && (
+          <div id={helpTextId} className="form-text">
+            {helpText}
+          </div>
+        )}
       </div>
     );
   }
 
   const {
     label,
+    hideLabel = false,
     type,
     showPasswordToggle = false,
     onTogglePassword,
     isPasswordVisible = false,
     className = '',
+    helpText,
+    helpTextId,
     ...inputProps
   } = props;
   const Icon = type === 'email' ? Mail : type === 'password' ? Lock : null;
@@ -95,7 +130,9 @@ export const FormField: React.FC<FormFieldProps> = (props) => {
 
   return (
     <div className="form-field">
-      <label htmlFor={inputProps.id} className="form-label">
+      <label
+        htmlFor={inputProps.id}
+        className={hideLabel ? 'form-label visually-hidden' : 'form-label'}>
         {label}
       </label>
       {Icon || showPasswordToggleButton ? (
@@ -122,6 +159,11 @@ export const FormField: React.FC<FormFieldProps> = (props) => {
         </div>
       ) : (
         input
+      )}
+      {helpText && (
+        <div id={helpTextId} className="form-text">
+          {helpText}
+        </div>
       )}
     </div>
   );

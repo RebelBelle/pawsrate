@@ -52,7 +52,7 @@ interface HomeProps {
 }
 
 export const Home: React.FC<HomeProps> = ({ isAuthenticated }) => (
-  <div className="home">
+  <div>
     <section className="home-hero" aria-labelledby="home-title">
       <div className="container">
         <div className="row home-hero__row">
@@ -94,7 +94,7 @@ export const Home: React.FC<HomeProps> = ({ isAuthenticated }) => (
                     Max’s Favorites
                   </h2>
                 </header>
-                <ul className="card-reminders">
+                <ul>
                   {sampleFoods.map((food) => (
                     <li
                       key={food.name}
@@ -147,7 +147,7 @@ export const Home: React.FC<HomeProps> = ({ isAuthenticated }) => (
     <section className="home-cta" aria-labelledby="start-title">
       <div className="container">
         <div className="card bg-gradient text-white text-center">
-          <div className="col-md-8 mx-auto">
+          <div className="card-body col-md-8 mx-auto">
             <h2 id="start-title">Ready to understand your fren better?</h2>
             {isAuthenticated ? (
               <Link className="btn btn-light" to="/dashboard">

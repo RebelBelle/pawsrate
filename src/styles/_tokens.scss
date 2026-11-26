@@ -1,41 +1,14 @@
 :root {
-  --gradient-brand-hover: linear-gradient(
-    to right,
-    color-mix(in oklab, var(--bs-primary) 94%, black),
-    color-mix(in oklab, var(--color-accent) 94%, black)
-  );
-
-  // Colors - Semantic Text
-  --color-text-secondary: #727b8e;
-  --color-text-tertiary: #999;
-  --color-text-disabled: #444;
-  --color-text-inverse: #fff;
-
-  // Colors - UI elements
-  --color-border: #d1d8e6;
-  --color-background: #fff;
-  --color-surface-subtle: #fff0eb;
-  --color-surface-light: #f9fafb;
-
-  // Colors - Icon/decorative
-  --color-icon-primary: #727b8e;
-  --color-paw-icon: #d9d5d0;
-
   // Typography
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  --font-weight-extrabold: 900;
 
   // Font sizes
   --font-size-sm: 12px;
   --font-size-base: 14px;
-  --font-size-lg: 18px;
-  --font-size-xl: 24px;
   --font-size-2xl: 32px;
-  --font-size-3xl: 40px;
   --font-size-4xl: 48px;
-  --font-size-5xl: 64px;
 
   // Line heights
   --line-height-tight: 1.2;
@@ -54,10 +27,6 @@
   --radius-xs: 2px;
   --radius-md: 8px;
   --radius-lg: 14px;
-
-  // Shadows
-  --shadow-button-hover:
-    0 20px 25px -5px rgb(0 0 0 / 10%), 0 8px 10px -6px rgb(0 0 0 / 10%);
 
   // Transitions
   --transition-fast: 0.2s ease;
