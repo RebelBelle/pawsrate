@@ -1,0 +1,88 @@
+@use 'mixins' as *;
+
+@keyframes flyer-wiggle {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+
+  50% {
+    transform: rotate(1deg);
+  }
+}
+
+.not-found {
+  .flyer {
+    animation: flyer-wiggle 0.8s ease-in-out 2;
+    background: var(--bs-white);
+    border: 2px solid var(--bs-body-color);
+    border-radius: var(--radius-lg) var(--radius-xs) var(--radius-lg)
+      var(--radius-xs);
+    box-shadow: 6px 6px 0 var(--bs-gray-300);
+    margin-inline: auto;
+    max-width: 22rem;
+    overflow: hidden;
+    padding: var(--space-xl) var(--space-xl) 0;
+    transform: rotate(-2deg);
+  }
+
+  .flyer-title {
+    color: var(--bs-primary);
+    font-family: 'Patrick Hand', cursive;
+    font-size: var(--font-size-4xl);
+    letter-spacing: 0.04em;
+    line-height: var(--line-height-tight);
+  }
+
+  .flyer-photo {
+    @include theme-flex;
+
+    border: 2px dashed var(--bs-body-color);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-4xl);
+    height: 7rem;
+  }
+
+  .flyer-text {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.25rem;
+  }
+
+  .flyer-tabs {
+    border-top: 2px dashed var(--bs-body-color);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: var(--space-xl) calc(var(--space-xl) * -1) 0;
+  }
+
+  .flyer-tab {
+    @include theme-flex;
+
+    color: var(--bs-body-color);
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.25rem;
+    height: 7.5rem;
+    transform: rotate(180deg);
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast),
+      transform var(--transition-fast);
+    writing-mode: vertical-rl;
+
+    &:not(:first-child) {
+      border-right: 2px dashed var(--bs-body-color);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: var(--bs-primary-bg-subtle);
+      color: var(--bs-primary);
+      transform: rotate(186deg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--bs-primary);
+      outline-offset: -6px;
+    }
+  }
+}
