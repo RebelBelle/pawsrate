@@ -79,7 +79,7 @@
 .autocomplete__selection {
   background-color: var(--bs-gray-300);
   border: 1px solid var(--bs-border-color);
-  border-radius: var(--radius-md);
+  border-radius: var(--bs-border-radius);
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
@@ -94,14 +94,14 @@
 }
 
 .autocomplete__selection-title {
-  font-size: var(--font-size-base);
+  font-size: 1rem; // convert this once you figure out what it's for
   font-weight: var(--font-weight-semibold);
   margin: 0 0 var(--space-sm);
   overflow-wrap: anywhere;
 }
 
 .autocomplete__image {
-  border-radius: var(--radius-md);
+  border-radius: var(--bs-border-radius);
   flex: 0 0 96px;
   height: 96px;
   object-fit: contain;

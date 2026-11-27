@@ -58,9 +58,8 @@ export const Home: React.FC<HomeProps> = ({ isAuthenticated }) => (
         <div className="row home-hero__row">
           <div className="col-lg-6 home-hero__content">
             <h1 id="home-title">
-              <span className="text-gradient">Your pet's food diary,</span>
-              <br />
-              made simple
+              <span className="text-gradient">Your pet's food diary,</span> made
+              simple
             </h1>
             <p className="lead">
               Track your pet's favorite meals and discover what keeps them

@@ -5,6 +5,7 @@ import {
   Route,
   Outlet,
   Navigate,
+  matchPath,
   useLocation,
 } from 'react-router-dom';
 import { SiteHeader } from './components/SiteHeader';
@@ -20,8 +21,11 @@ interface AppLayoutProps {
   onLogout: () => void;
 }
 
-const HomeFooter: React.FC = () => (
-  <footer className="text-center py-4 mt-auto">
+const appRoutePaths = ['/', '/login', '/signup', '/dashboard', '/settings'];
+const footerRoutePaths = ['/', '/login', '/signup'];
+
+const SiteFooter: React.FC = () => (
+  <footer className="text-center py-4">
     <div className="container">
       <p className="text-body-secondary mb-0">
         &copy; 2026 PawsRate. All rights reserved. Made with 🐾 for dog lovers.
@@ -32,21 +36,25 @@ const HomeFooter: React.FC = () => (
 
 const AppLayout: React.FC<AppLayoutProps> = ({ isAuthenticated, onLogout }) => {
   const { pathname } = useLocation();
+  const shouldShowFooter = footerRoutePaths.some(
+    (path) => matchPath({ path, end: true }, pathname) !== null,
+  );
+  const isNotFoundPage = !appRoutePaths.some(
+    (path) => matchPath({ path, end: true }, pathname) !== null,
+  );
 
   return (
-    <>
+    <div className="d-flex min-vh-100 flex-column">
       <SiteHeader isAuthenticated={isAuthenticated} onLogout={onLogout} />
-      <main>
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <Outlet />
-            </div>
+      <main className="container my-auto py-4">
+        <div className="row">
+          <div className="col-12">
+            <Outlet />
           </div>
         </div>
       </main>
-      {pathname === '/' && <HomeFooter />}
-    </>
+      {(shouldShowFooter || isNotFoundPage) && <SiteFooter />}
+    </div>
   );
 };
 

@@ -14,7 +14,7 @@
   appearance: none;
   background-color: var(--bs-body-bg);
   border: 1px solid var(--bs-border-color);
-  border-radius: var(--radius-xs);
+  border-radius: var(--bs-border-radius);
   cursor: pointer;
   display: grid;
   flex-shrink: 0;
@@ -58,8 +58,5 @@
 
 .checkbox__label {
   cursor: pointer;
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-tight);
   user-select: none;
 }

@@ -15,7 +15,8 @@ export const NotFound: React.FC = () => {
       <div className="row align-items-center justify-content-center g-5">
         <div className="col-lg-6">
           <h1 id="not-found-title" className="mb-3">
-            We can't find that page
+            <span className="text-gradient">Uh oh!</span> This page has wandered
+            off.
           </h1>
           <p className="lead mb-4">
             It may have moved, or the address has a typo.

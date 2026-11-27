@@ -22,6 +22,8 @@ PawsRate is a learning project for recording food preferences: what a pet tried,
 
 **Rules:** decide whether multi-device data and real accounts are needed before selecting an authentication provider or backend. Do not present prototype navigation as authentication.
 
+**Navigation:** when real authentication is added, keep the shared header and 404-page suggested links in sync with auth state (for example, do not show Dashboard to signed-out users or Sign In to signed-in users) and guard private routes.
+
 **Done when:** the chosen account boundary is documented and the application behavior matches it.
 
 **Open questions:** is PawsRate intended to remain a local personal tracker, or does it need user accounts and synchronized data?
@@ -58,5 +60,5 @@ Build a Node validation script (npm run validate:foods) that checks src/data/pet
 - Review the planned system dark theme after the light foundation is clean.
 - Add automated tests when records or persistence introduce behavior that needs regression coverage.
 - Relevant Reminders / Watchlist (Optional)
--- Short, food-specific notes like "Check stomach reaction after salmon topper" or "Reorder freeze-dried treats"—replacing leftover unrelated placeholders.
--- Why it matters: A small checklist or reminder strip is helpful only when tied to the pet's food routine. Keeping it tight helps you practice scope restraint—knowing what to cut so the food log stays front and center.
+  -- Short, food-specific notes like "Check stomach reaction after salmon topper" or "Reorder freeze-dried treats"—replacing leftover unrelated placeholders.
+  -- Why it matters: A small checklist or reminder strip is helpful only when tied to the pet's food routine. Keeping it tight helps you practice scope restraint—knowing what to cut so the food log stays front and center.

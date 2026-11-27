@@ -42,6 +42,10 @@ $font-family-sans-serif:
   blinkmacsystemfont,
   'Segoe UI',
   sans-serif;
+$font-size-base: 1rem;
+$font-weight-bold: 700;
+$h1-font-size: $font-size-base * 4;
+$headings-font-weight: 700;
 
 // Buttons & Forms
 $input-btn-padding-y: 0.75rem;
@@ -57,7 +61,8 @@ $btn-box-shadow:
 $btn-border-radius: $border-radius-lg;
 $btn-border-radius-sm: $border-radius;
 
-// Inputs
+// Forms
+$form-label-font-weight: $font-weight-bold;
 $input-bg: $white;
 $input-group-addon-color: $body-secondary-color;
 $input-group-addon-bg: $white;

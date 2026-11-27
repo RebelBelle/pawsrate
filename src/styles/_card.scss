@@ -8,7 +8,7 @@
   }
 
   .card-emoji {
-    font-size: var(--font-size-4xl);
+    font-size: calc(var(--bs-body-font-size) * 3);
     line-height: 1;
   }
 }

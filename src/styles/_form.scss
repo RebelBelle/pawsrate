@@ -23,21 +23,9 @@
 }
 
 .form-field {
-  @include theme-flex(
-    $align: stretch,
-    $direction: column,
-    $gap: var(--space-sm)
-  );
+  @include theme-flex($align: stretch, $direction: column);
 
   width: 100%;
-
-  .form-label {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-tight);
-    margin: 0;
-    padding: 0;
-  }
 }
 
 // Form Layouts
